@@ -1,5 +1,5 @@
 <template>
-  <div class="grid gap-4 grid-cols-4">
+  <div class="grid gap-4 grid-cols-5">
     <CompanyItem
       v-for="company in companies"
       :key="company.id"

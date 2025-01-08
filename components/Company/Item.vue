@@ -4,11 +4,11 @@
   >
     <div class="font-bold">{{ company?.name }}</div>
     <img
-      class="object-contain w-12 h-12"
+      class="object-contain w-10 h-10"
       :src="company?.image?.path"
       :alt="company?.name"
-      width="48"
-      height="48"
+      width="40"
+      height="40"
     />
   </div>
 </template>
