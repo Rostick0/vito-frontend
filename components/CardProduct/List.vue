@@ -1,5 +1,5 @@
 <template>
-  <div class="grid gap-4 grid-cols-[repeat(auto-fit,240px)] items-start">
+  <div class="grid gap-4 grid-cols-[repeat(auto-fit,232px)] items-start">
     <CardProductItem
       v-for="product in products"
       :key="product?.id"

@@ -26,6 +26,13 @@ export default defineNuxtConfig({
     },
   },
 
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/device",
+    "nuxt-lazy-load",
+    "@nuxt/image",
+  ],
+
   tailwindcss: {
     config: {
       theme: {
@@ -37,8 +44,9 @@ export default defineNuxtConfig({
       },
     },
   },
-
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/device"],
+  lazyLoad: {
+    directiveOnly: true,
+  },
 
   imports: {
     dirs: [

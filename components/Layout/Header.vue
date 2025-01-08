@@ -1,5 +1,8 @@
 <template>
-  <header class="bg-white sticky top-0 shadow-md z-20">
+  <header
+    class="bg-white shadow-md z-20"
+    :class="{ 'sticky top-0': headerIsSticky }"
+  >
     <div class="bg-zinc-800 text-white py-3">
       <div class="container flex justify-between mx-auto">
         <nav class="flex gap-4">
@@ -44,4 +47,9 @@
 
 <script setup lang="ts">
 import { ROUTES_NAMES } from "~/router/routes";
+interface IProps {
+  headerIsSticky: boolean;
+}
+
+const props = defineProps<IProps>();
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center gap-x-2">
-    <img
+    <NuxtImg
       src="/favicons/icon.svg"
       alt="Vito"
       width="32"
