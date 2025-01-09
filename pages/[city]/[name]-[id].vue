@@ -1,11 +1,11 @@
 <template>
   <!-- <NuxtLayout name="default" :headerIsSticky="false"> -->
   <div class="container mx-auto">
+    <UiH1>{{ product?.name }}</UiH1>
     <div class="flex gap-x-12 items-start">
       <div class="grow">
-        <UiH1>{{ product?.name }}</UiH1>
         <!-- <div class=" mx-auto" style="max-width: 75%;"> -->
-          <ProductImages :product="product" :images="product?.images" />
+        <ProductImages :product="product" :images="product?.images" />
         <!-- </div> -->
         <div class="flex flex-col gap-y-10 mt-16">
           <ProductParams title="О смартфоне">
@@ -49,7 +49,7 @@
         </div>
       </div>
       <div
-        class="bg-white rounded-lg shrink-0 p-4 sticky top-4 w-full max-w-72"
+        class="bg-white rounded-lg shrink-0 p-4 sticky top-4 w-full max-w-80"
       >
         <div class="flex justify-between mb-3">
           <div class="font-bold text-3xl">

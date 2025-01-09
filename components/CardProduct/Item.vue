@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded-xl">
-    <NuxtLink class="relative flex pt-[100%]" to="#">
+    <NuxtLink class="relative flex pt-[100%]" to="/moscow/product-1">
       <div class="absolute top-0">
         <img
           class="object-cover"
@@ -16,7 +16,7 @@
     </NuxtLink>
     <div class="p-4">
       <div class="flex gap-x-2 items-start justify-between mb-1">
-        <NuxtLink class="font-bold text-sm text-sky-400" to="#">{{
+        <NuxtLink class="font-bold text-sm text-sky-400" to="/moscow/product-1">{{
           product?.name
         }}</NuxtLink>
         <button class="flex" @click="favoriteToggle(product?.id)">

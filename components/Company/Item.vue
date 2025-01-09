@@ -7,8 +7,10 @@
       class="object-contain w-10 h-10"
       :src="company?.image?.path"
       :alt="company?.name"
+      v-lazy-load
       width="40"
       height="40"
+      loading="lazy"
     />
   </div>
 </template>
