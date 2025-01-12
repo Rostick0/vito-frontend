@@ -1,6 +1,6 @@
 <template>
   <div
-    class="company-item rounded-lg bg-white flex justify-between items-center py-3 px-4 hover:bg-slate-50"
+    class="company-item rounded-lg bg-white flex gap-x-2 justify-between items-center py-3 px-4 hover:bg-slate-50"
   >
     <div class="font-bold">{{ company?.name }}</div>
     <img

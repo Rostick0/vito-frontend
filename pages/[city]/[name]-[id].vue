@@ -4,9 +4,12 @@
     <UiH1>{{ product?.name }}</UiH1>
     <div class="flex gap-x-12 items-start">
       <div class="grow">
-        <!-- <div class=" mx-auto" style="max-width: 75%;"> -->
         <ProductImages :product="product" :images="product?.images" />
-        <!-- </div> -->
+        <ProductPrePay
+          v-if="$device.isMobileOrTablet"
+          class="mt-8 -mb-2"
+          :product="product"
+        />
         <div class="flex flex-col gap-y-10 mt-16">
           <ProductParams title="О смартфоне">
             <div class="grid gap-2 grid-cols-2">
@@ -47,39 +50,17 @@
           <UiH2>Рекомендации для вас</UiH2>
           <CardProductList :products="products" />
         </div>
-      </div>
-      <div
-        class="bg-white rounded-lg shrink-0 p-4 sticky top-4 w-full max-w-80"
-      >
-        <div class="flex justify-between mb-3">
-          <div class="font-bold text-3xl">
-            {{ formatNumber(product?.price) }}&nbsp;₽
-          </div>
-          <button class="flex" @click="favoriteToggle(product?.id)">
-            <IconFavorite
-              v-if="favoriteHas(product?.id)"
-              class="fill-sky-400"
-              width="28"
-              height="28"
-            />
-            <IconFavoriteStroke
-              v-else
-              class="shrink-0 fill-sky-400"
-              width="28"
-              height="28"
-            />
-          </button>
+        <div
+          class="bg-white rounded-t-lg fixed left-2/4 bottom-0 -translate-x-2/4 p-3 max-w-48 w-full z-10"
+        >
+          <UiBtn class="justify-center w-full">Написать</UiBtn>
         </div>
-        <div class="mb-3">
-          <span class="bg-green-500 text-white rounded py-1 px-1.5">{{
-            product?.raiting
-          }}</span
-          >&nbsp;<span class="text-green-500"
-            >{{ product?.reviews_count }} отзывов о модели</span
-          >
-        </div>
-        <ProductUser v-if="product?.user" :user="product?.user" />
       </div>
+      <ProductPrePay
+        v-if="$device.isDesktop"
+        class="max-w-80"
+        :product="product"
+      />
     </div>
   </div>
   <!-- </NuxtLayout> -->
@@ -133,8 +114,6 @@ const product = {
     created_at: new Date("02-03-2024 10:10:20"),
   },
 } as IProduct;
-
-const { favoriteHas, favoriteToggle } = useFavorite();
 
 const products = [
   {

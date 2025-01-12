@@ -1,9 +1,9 @@
 <template>
   <div class="bg-white rounded-xl">
     <NuxtLink class="relative flex pt-[100%]" to="/moscow/product-1">
-      <div class="absolute top-0">
+      <div class="absolute top-0 w-full">
         <img
-          class="object-cover"
+          class="object-cover w-full h-full"
           :src="product?.main_image?.path"
           :alt="product?.name"
           width="232"

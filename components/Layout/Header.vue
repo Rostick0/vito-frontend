@@ -3,7 +3,7 @@
     class="bg-white shadow-md z-20"
     :class="{ 'sticky top-0': headerIsSticky }"
   >
-    <div class="bg-zinc-800 text-white py-3">
+    <div v-if="$device.isDesktop" class="bg-zinc-800 text-white py-3">
       <div class="container flex justify-between mx-auto">
         <nav class="flex gap-4">
           <NuxtLink>Вакансии</NuxtLink>
@@ -26,16 +26,21 @@
       </div>
     </div>
     <div class="container flex mx-auto py-3">
-      <NuxtLink class="flex shrink-0 mr-5" :to="ROUTES_NAMES.main">
+      <NuxtLink
+        v-if="$device.isDesktop"
+        class="flex shrink-0 mr-5"
+        :to="ROUTES_NAMES.main"
+      >
         <Logo />
       </NuxtLink>
       <UiBtn class="items-center gap-x-2 mr-2">
         <IconList class="fill-white" />
-        <span>Каталог</span>
+        <span v-if="$device.isDesktop">Каталог</span>
       </UiBtn>
-      <Search class="mr-8" />
+      <Search />
       <NuxtLink
-        class="flex gap-x-2 items-center self-center font-semibold whitespace-nowrap"
+        v-if="$device.isDesktop"
+        class="flex gap-x-2 items-center self-center font-semibold ml-8 whitespace-nowrap"
         to="#"
       >
         <IconWindowAdd />
