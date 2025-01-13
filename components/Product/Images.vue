@@ -1,6 +1,6 @@
 <template>
   <div class="mx-auto" :class="{ 'w-4/5': $device.isDesktop }">
-    <div class="flex relative pt-[62%] mb-4">
+    <div class="flex relative pt-[62%] mb-4 max-md:mb-2">
       <div class="absolute top-0 left-0 w-full h-full">
         <ClientOnly>
           <ProductSwiperImages :activeSlide="activeSlide" v-bind="props" />

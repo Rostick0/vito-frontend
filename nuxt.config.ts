@@ -49,10 +49,10 @@ export default defineNuxtConfig({
     directiveOnly: true,
   },
 
-  // ssr: false, // Отключаем SSR для полной статики
-  // nitro: {
-  //   preset: "static", // Указываем, что хотим получить статику
-  // },
+  ssr: false, // Отключаем SSR для полной статики
+  nitro: {
+    preset: "static", // Указываем, что хотим получить статику
+  },
 
   imports: {
     dirs: [

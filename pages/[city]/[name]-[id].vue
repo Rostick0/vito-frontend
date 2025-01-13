@@ -7,12 +7,12 @@
         <ProductImages :product="product" :images="product?.images" />
         <ProductPrePay
           v-if="$device.isMobileOrTablet"
-          class="mt-8 -mb-2"
+          class="mt-6 -mb-8"
           :product="product"
         />
-        <div class="flex flex-col gap-y-10 mt-16">
+        <div class="flex flex-col gap-y-10 max-md:gap-y-5 mt-16">
           <ProductParams title="О смартфоне">
-            <div class="grid gap-2 grid-cols-2">
+            <div class="grid gap-2 md:grid-cols-2">
               <ProductParamsItem title="Экран">Без дефектов</ProductParamsItem>
               <ProductParamsItem title="Корпус">Без дефектов</ProductParamsItem>
               <ProductParamsItem title="Комплект"
@@ -21,7 +21,7 @@
             </div>
           </ProductParams>
           <ProductParams title="Характеристики">
-            <div class="grid gap-2 grid-cols-2">
+            <div class="grid gap-2 sm:grid-cols-2">
               <ProductParamsItem title="Состояние">Хорошее</ProductParamsItem>
               <ProductParamsItem title="Производитель">Apple</ProductParamsItem>
               <ProductParamsItem title="Модель"

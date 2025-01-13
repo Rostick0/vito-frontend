@@ -1,6 +1,6 @@
 <template>
   <!--  -->
-  <div class="grid grid-cols-[repeat(5,minmax(160px,1fr))] gap-4 overflow-auto">
+  <div class="grid grid-cols-[repeat(5,minmax(160px,1fr))] gap-4 max-md:gap-3 overflow-auto">
     <CompanyItem
       v-for="company in companies"
       :key="company.id"
