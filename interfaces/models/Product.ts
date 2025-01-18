@@ -46,7 +46,7 @@ export interface IProduct {
   created_at: Date;
   main_image: IImage;
   category?: ICategory;
-  images: IImage[];
+  image_rels: IImageRel[];
   reviews_count?: number;
   user?: IUser;
   properties?: IProductProperty[];

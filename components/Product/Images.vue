@@ -9,11 +9,11 @@
     </div>
     <div class="flex gap-x-1 overflow-auto">
       <img
-        v-for="(image, i) in images"
+        v-for="(image, i) in image_rels"
         @click="activeSlide = i"
         class="object-cover border-2 w-20 h-16 hover:border-sky-300"
         :class="[activeSlide == i ? 'border-sky-500' : 'border-transparent']"
-        :src="image?.path"
+        :src="image?.image?.path"
         :alt="product?.name"
         v-lazy-load
         decoding="async"
@@ -28,7 +28,7 @@
 <script lang="ts" setup>
 interface IProps {
   product: IProduct;
-  images: IImage[];
+  image_rels: IImageRel[];
 }
 
 const props = defineProps<IProps>();

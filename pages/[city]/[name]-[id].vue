@@ -4,7 +4,7 @@
     <UiH1>{{ product?.name }}</UiH1>
     <div class="flex gap-x-12 items-start">
       <div class="grow">
-        <ProductImages :product="product" :images="product?.images" />
+        <ProductImages :product="product" :image_rels="product?.image_rels" />
         <ProductPrePay
           v-if="$device.isMobileOrTablet"
           class="mt-6 -mb-8"
@@ -82,26 +82,46 @@ const product = {
     id: 1,
     name: "Смартфоны",
   },
-  images: [
+  image_rels: [
     {
       id: 1,
-      path: "https://20.img.avito.st/image/1/1.Dug59La4ogEPXWAEKaxRuSJVoAeHVSAJT1CgA4ldqguP.huK_U9lVQDbmkskoavLofvO-dpTfHtlye-lQlfRRbFo",
+      image_id: 1,
+      image: {
+        id: 1,
+        path: "https://20.img.avito.st/image/1/1.Dug59La4ogEPXWAEKaxRuSJVoAeHVSAJT1CgA4ldqguP.huK_U9lVQDbmkskoavLofvO-dpTfHtlye-lQlfRRbFo",
+      },
     },
     {
       id: 2,
-      path: "https://30.img.avito.st/image/1/1.Qyf7X7a4787N9i3L8RJbJf3-7chF_m3GjfvtzEv258RN.k-2MyUACTMmuc1XodWEkU-P88M9aOGjnWkmycCoKRL4",
+      image_id: 2,
+      image: {
+        id: 2,
+        path: "https://30.img.avito.st/image/1/1.Qyf7X7a4787N9i3L8RJbJf3-7chF_m3GjfvtzEv258RN.k-2MyUACTMmuc1XodWEkU-P88M9aOGjnWkmycCoKRL4",
+      },
     },
     {
       id: 3,
-      path: "https://80.img.avito.st/image/1/1.przNLLa4ClX7hchQjRb67daNCFNzjYhdu4gIV32FAl97.qIDjXX209e_FdYfnMu2J8pqYspd7N45_g4BGV5CuO4k",
+      image_id: 3,
+      image: {
+        id: 3,
+        path: "https://80.img.avito.st/image/1/1.przNLLa4ClX7hchQjRb67daNCFNzjYhdu4gIV32FAl97.qIDjXX209e_FdYfnMu2J8pqYspd7N45_g4BGV5CuO4k",
+      },
     },
     {
       id: 4,
-      path: "https://30.img.avito.st/image/1/1.RlA5_ra46rkPVyi8OcdMASJf6L-HX2ixT1rou4lX4rOP.BfchIu3cBkXcqrGDSAmLdxS52B5ARB7mtB-OeFDF-n0",
+      image_id: 4,
+      image: {
+        id: 4,
+        path: "https://30.img.avito.st/image/1/1.RlA5_ra46rkPVyi8OcdMASJf6L-HX2ixT1rou4lX4rOP.BfchIu3cBkXcqrGDSAmLdxS52B5ARB7mtB-OeFDF-n0",
+      },
     },
     {
       id: 5,
-      path: "https://80.img.avito.st/image/1/1.udqBS7a4FTO34tc2_12g2IfqFzU_6pc79-8XMTHiHTk3.IDR48Qyb-0euWu7qpAopmrTQbw_9wyFIumPw2YarkfU",
+      image_id: 5,
+      image: {
+        id: 5,
+        path: "https://80.img.avito.st/image/1/1.udqBS7a4FTO34tc2_12g2IfqFzU_6pc79-8XMTHiHTk3.IDR48Qyb-0euWu7qpAopmrTQbw_9wyFIumPw2YarkfU",
+      },
     },
   ],
   reviews_count: 153,
