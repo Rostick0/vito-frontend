@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen">
     <LayoutHeader :headerIsSticky="headerIsSticky" />
-    <main class="bg-gray-100 py-6 grow">
+    <main class="bg-gray-100 pt-8 pb-20 grow">
       <slot />
     </main>
     <LayoutFooter />

@@ -10,17 +10,17 @@
 
 <script lang="ts" setup>
 const companies = [
-  { id: 1, name: "Apple", image: { id: 1, path: "/images/logo-apple.png" } },
-  { id: 2, name: "Asus", image: { id: 1, path: "/images/logo-asus.png" } },
-  { id: 3, name: "Acer", image: { id: 1, path: "/images/logo-acer.png" } },
-  { id: 4, name: "Hp", image: { id: 1, path: "/images/logo-hp.png" } },
-  { id: 5, name: "Xiaomi", image: { id: 1, path: "/images/logo-xiaomi.png" } },
-  { id: 6, name: "Samsung", image: { id: 1, path: "/images/logo-samsung.webp" } },
-  { id: 7, name: "Chuwi", image: { id: 1, path: "/images/logo-chuwi.png" } },
-  { id: 8, name: "HKC", image: { id: 1, path: "/images/logo-hkc.webp" } },
-  { id: 9, name: "DELL", image: { id: 1, path: "/images/logo-dell.webp" } },
-  { id: 10, name: "Lenovo", image: { id: 1, path: "/images/logo-lenovo.png" } },
-  // { id: 8, name: "Lenovo", image: { id: 1, path: "/images/logo-lenovo.png" } },
+  { id: 1, name: "Apple", image_rel: { id: 1, image: { id: 1, path: "/images/logo-apple.png" } }},
+  { id: 2, name: "Asus", image_rel: { id: 1, image: { id: 1, path: "/images/logo-asus.png" } }},
+  { id: 3, name: "Acer", image_rel: { id: 1, image: { id: 1, path: "/images/logo-acer.png" } }},
+  { id: 4, name: "Hp", image_rel: { id: 1, image: { id: 1, path: "/images/logo-hp.png" } }},
+  { id: 5, name: "Xiaomi", image_rel: { id: 1, image: { id: 1, path: "/images/logo-xiaomi.png" } }},
+  { id: 6, name: "Samsung", image_rel: { id: 1, image: { id: 1, path: "/images/logo-samsung.webp" } }},
+  { id: 7, name: "Chuwi", image_rel: { id: 1, image: { id: 1, path: "/images/logo-chuwi.png" } }},
+  { id: 8, name: "HKC", image_rel: { id: 1, image: { id: 1, path: "/images/logo-hkc.webp" } }},
+  { id: 9, name: "DELL", image_rel: { id: 1, image: { id: 1, path: "/images/logo-dell.webp" } }},
+  { id: 10, name: "Lenovo", image_rel: { id: 1, image: { id: 1, path: "/images/logo-lenovo.png" } }},
+  // { id: 8, name: "Lenovo", image_rel: { id: 1, image: { id: 1, path: "/images/logo-lenovo.png" } }},
 ] as ICompany[];
 
 const products = [
