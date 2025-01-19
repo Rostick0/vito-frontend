@@ -1,7 +1,6 @@
 import type { apiNames } from "~/api";
 import api from "~/api";
 import type { initialFiltersItem } from "./useFilters";
-import uniqueId from "lodash/uniqueId";
 
 // const name = {
 // login: () => {},
@@ -44,7 +43,7 @@ export default async <T>({
   withCache = false,
   cacheDataLimit = 20,
 }: iUseApi) => {
-  const id = uniqueId();
+  const id = useId();
   const data = useState<T | null>(`data-${id}`, () => null);
   const isLoading = useState<boolean | null>(`loading-${id}`, () => null);
   const error = useState(`error-${id}`, () => false);
