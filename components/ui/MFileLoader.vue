@@ -1,5 +1,5 @@
 <template>
-  <UiStack flex="same-all" gap="2" flexDirection="column">
+  <div class="flex flex-col gap-y-2">
     <label
       class="control__photoloader photoloader__block"
       :class="{ error: errorMessage }"
@@ -28,13 +28,13 @@
         </div>
       </div>
     </div>
-  </UiStack>
+  </div>
 </template>
 
 <script setup>
 // import debounce from "lodash/debounce";
 import { size } from "@vee-validate/rules";
-import { v4 } from "uuid";
+import uniqueId from "lodash/uniqueId";
 
 defineComponent({
   inheritAttrs: false,
@@ -48,9 +48,6 @@ const props = defineProps({
   message: String,
   label: String,
   placeholder: String,
-  maska: String,
-  dataMaskaReversed: Boolean,
-  maskaTokens: String,
   errorMessage: String,
   onChange: Function,
   deps: [Array, Object, String, Number],
@@ -90,7 +87,7 @@ const handleOnFileChange = (e) => {
     return emits("setError", `The image size must be less than ${sizeFile} KB`);
 
   const file = {
-    id: v4(),
+    id: uniqueId(),
 
     path: URL.createObjectURL(_files[0]),
     file: _files[0],

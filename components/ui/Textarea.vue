@@ -1,28 +1,21 @@
 <template>
-  <UiControl
-    :label="label"
-    :invalid="!!errorMessage || invalid"
-    :message="errorMessage || message"
-    :rightIcon="rightIcon"
-  >
-    <textarea
-      :="$attrs"
-      class="control__textarea"
-      v-maska
-      :data-maska="maska"
-      :data-maska-tokens="maskaTokens"
-      :data-maska-reversed="dataMaskReserved"
-      @input="
-        $emit(
-          'update:modelValue',
-          ($event.target as HTMLInputElement).value || undefined
-        )
-      "
-      ref="textarea"
-      :value="modelValue"
-      :rows="rows"
-    ></textarea>
-  </UiControl>
+  <textarea
+    :="$attrs"
+    class="control__textarea"
+    v-maska
+    :data-maska="maska"
+    :data-maska-tokens="maskaTokens"
+    :data-maska-reversed="dataMaskReserved"
+    @input="
+      $emit(
+        'update:modelValue',
+        ($event.target as HTMLInputElement).value || undefined
+      )
+    "
+    ref="textarea"
+    :value="modelValue"
+    :rows="rows"
+  ></textarea>
 </template>
 
 <script setup lang="ts">
@@ -30,14 +23,9 @@ import { type TextareaHTMLAttributes } from "vue";
 
 export interface FieldProps extends /* @vue-ignore */ TextareaHTMLAttributes {
   modelValue?: string;
-  invalid?: boolean;
-  rightIcon?: any;
-  message?: string;
-  label?: string;
   maska?: any;
   dataMaskReserved?: boolean;
   maskaTokens?: any;
-  errorMessage?: string;
   rows?: string | number;
 }
 

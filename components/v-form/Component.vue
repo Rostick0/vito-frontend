@@ -1,18 +1,18 @@
 <template>
-  <UiField
+  <VFormField
     v-if="['input', 'text'].includes(field.type)"
     v-model="model"
     v-bind="field.bind"
     :errorMessage="errorMessage"
   />
   <ClientOnly v-else-if="field.type == 'select'">
-    <UiMultiSelect
+    <VFormMultiSelect
       v-model="model"
       v-bind="field.bind"
       :error-message="errorMessage"
     />
   </ClientOnly>
-  <UiTextarea
+  <VFormTextarea
     v-else-if="field.type == 'textarea'"
     v-model="model"
     v-bind="field.bind"
@@ -24,7 +24,7 @@
     v-bind="field.bind"
     :error-message="errorMessage"
   /> -->
-  <UiMultiMSelect
+  <VFormMultiMSelect
     v-else-if="field.type == 'multiple-select'"
     v-model="model"
     v-bind="field.bind"
@@ -39,14 +39,14 @@
     :error-message="errorMessage"
   />
 
-  <UiDatePicker
+  <VFormDatePicker
     v-else-if="field.type == 'date'"
     v-model="model"
     v-bind="field.bind"
     :error-message="errorMessage"
   />
 
-  <UiFileLoader
+  <VFormFileLoader
     v-else-if="field.type == 'file-loader'"
     v-model="model"
     v-bind="field.bind"
@@ -59,14 +59,14 @@
     :error-message="errorMessage"
   />
 
-  <UiPhotoLoader
+  <VFormPhotoLoader
     v-else-if="field.type == 'photo-loader'"
     v-model="model"
     v-bind="field.bind"
     :error-message="errorMessage"
   />
 
-  <UiMPhotoLoader
+  <VFormMPhotoLoader
     v-else-if="field.type == 'multiple-photo-loader'"
     v-model="model"
     v-bind="field.bind"

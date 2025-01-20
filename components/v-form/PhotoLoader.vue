@@ -1,22 +1,15 @@
 <template>
-  <div class="flex gap-3">
-    <label
-      class="control__photoloader photoloader__block"
-      :class="{ error: errorMessage || invalid }"
-    >
-      <input
-        @change="handleOnFileChange"
-        v-bind="$attrs"
-        class="photoloader__input"
-        type="file"
-      />
-      <img class="photoloader__preview" v-if="url" :src="url" alt="" />
-      <template v-else>
-        <div class="photoloader__title">Загрузите фото</div>
-        <div class="photoloader__subtitle">PNG, JPG, GIF up to 3MB</div>
-      </template>
-    </label>
-  </div>
+  <UiControl
+    :label="label"
+    :invalid="!!errorMessage || invalid"
+    :message="errorMessage || message"
+    :rightIcon="rightIcon"
+  >
+    <UiPhotoLoader
+      v-bind="$attrs"
+      @update:modelValue="(file) => emits('update:modelValue', file)"
+    />
+  </UiControl>
 </template>
 <script setup>
 defineComponent({
@@ -27,6 +20,9 @@ const emits = defineEmits(["update:modelValue"]);
 const props = defineProps({
   modelValue: String,
   invalid: Boolean,
+  rightIcon: String,
+  message: String,
+  label: String,
   placeholder: String,
   errorMessage: String,
   onChange: Function,

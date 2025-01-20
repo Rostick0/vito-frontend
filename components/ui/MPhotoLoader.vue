@@ -1,72 +1,73 @@
 <template>
-  <UiControl
-    :label="label"
-    :invalid="!!errorMessage || invalid"
-    :message="errorMessage || message"
-    :rightIcon="rightIcon"
-  >
-    <UiStack flex="same-all" gap="2" flexDirection="column">
-      <label
-        class="control__photoloader photoloader__block"
-        :class="{ error: errorMessage }"
-      >
-        <input
-          @change="handleOnFileChange"
-          @click="$event.target.value = null"
-          v-bind="$attrs"
-          class="photoloader__input"
-          type="file"
-          accept="image/webp,image/png,image/jpeg,image/jpg,image/gif"
-        />
-        <!-- <img class='photoloader__image' src="/img/icons/upload.svg" alt="" /> -->
-        <div class="photoloader__title">Нажмите для загрузки фото</div>
-        <div class="photoloader__subtitle">PNG, JPG, GIF максимум 3MB</div>
-      </label>
-      <div
-        class="photoloader__images"
-        v-if="modelValue?.length"
-        @mouseup="dragElem = null"
-      >
-        <template v-for="item in modelValue" :key="item.id">
-          <div @mousedown="dragElem = item">
-            <UiDraggable>
-              <template #willselect>
+  <div class="flex flex-col gap-y-2">
+    <label
+      class="control__photoloader photoloader__block"
+      :class="{ error: errorMessage || invalid }"
+    >
+      <input
+        @change="handleOnFileChange"
+        @click="$event.target.value = null"
+        v-bind="$attrs"
+        class="photoloader__input"
+        type="file"
+        accept="image/webp,image/png,image/jpeg,image/jpg,image/gif"
+      />
+      <!-- <img class='photoloader__image' src="/img/icons/upload.svg" alt="" /> -->
+      <div class="photoloader__title">Нажмите для загрузки фото</div>
+      <div class="photoloader__subtitle">PNG, JPG, GIF максимум 3MB</div>
+    </label>
+    <div
+      class="photoloader__images"
+      v-if="modelValue?.length"
+      @mouseup="dragElem = null"
+    >
+      <template v-for="item in modelValue" :key="item.id">
+        <div @mousedown="dragElem = item">
+          <UiDraggable>
+            <template #willselect>
+              <div
+                class="photoloader__image"
+                @mouseup="
+                  dragElem &&
+                    item.id != dragElem.id &&
+                    changeOrder(dragElem, item)
+                "
+              >
                 <div
-                  class="photoloader__image"
-                  @mouseup="
-                    dragElem &&
-                      item.id != dragElem.id &&
-                      changeOrder(dragElem, item)
-                  "
+                  class="photoloader__image_delete"
+                  @click="handleRemove(item)"
                 >
-                  <div
-                    class="photoloader__image_delete"
-                    @click="handleRemove(item)"
-                  >
-                    ✖
-                  </div>
-                  <img
-                    class="photoloader__img"
-                    :src="item?.path"
-                    alt="Ошибка загрузки"
-                  />
+                  ✖
                 </div>
-              </template>
-              <template #selected>
-                <img :src="item?.path" alt="Ошибка загрузки" />
-              </template>
-            </UiDraggable>
-          </div>
-        </template>
-      </div>
-    </UiStack>
-  </UiControl>
+                <img
+                  class="photoloader__img"
+                  :src="item?.path"
+                  alt="Ошибка загрузки"
+                  v-lazy-load
+                />
+              </div>
+            </template>
+            <template #selected>
+              <img
+                class="flex"
+                :src="item?.path"
+                alt="Ошибка загрузки"
+                v-lazy-load
+                width="200"
+                height="132"
+              />
+            </template>
+          </UiDraggable>
+        </div>
+      </template>
+    </div>
+  </div>
 </template>
 
 <script setup>
 import debounce from "lodash/debounce";
 import { size } from "@vee-validate/rules";
-import { v4 } from "uuid";
+import uniqueId from "lodash/uniqueId";
 
 defineComponent({
   inheritAttrs: false,
@@ -79,18 +80,8 @@ const props = defineProps({
   invalid: Boolean,
   rightIcon: String,
   message: String,
-  label: String,
-  placeholder: String,
-  maska: String,
-  dataMaskaReversed: Boolean,
-  maskaTokens: String,
   errorMessage: String,
   onChange: Function,
-  deps: [Array, Object, String, Number],
-  onDepsChange: {
-    type: Function,
-  },
-  forceDeps: Boolean,
 });
 
 const dragElem = ref();
@@ -128,7 +119,7 @@ const handleOnFileChange = (e) => {
     return emits("setError", "The file must be an image");
 
   const file = {
-    id: v4(),
+    id: uniqueId(),
     path: URL.createObjectURL(_files[0]),
     file: _files[0],
   };

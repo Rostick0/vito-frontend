@@ -1,12 +1,17 @@
 <template>
-  <div class="control__fileloader fileloader">
-    <input
-      @change="handleOnFileChange"
-      v-bind="$attrs"
+  <UiControl
+    :label="label"
+    :invalid="!!errorMessage || invalid"
+    :message="errorMessage || message"
+    :rightIcon="rightIcon"
+  >
+    <UiFileLoader
+      v-bind="props"
       class="fileloader__input"
+      @update:modelValue="(file) => emits('update:modelValue', file)"
       type="file"
     />
-  </div>
+  </UiControl>
 </template>
 <script setup>
 defineComponent({
@@ -17,19 +22,14 @@ const emits = defineEmits(["update:modelValue"]);
 
 const props = defineProps({
   modelValue: String,
+  invalid: Boolean,
   rightIcon: String,
+  message: String,
+  label: String,
   placeholder: String,
+  errorMessage: String,
   onChange: Function,
 });
-
-const handleOnFileChange = (e) => {
-  const files = e.target.files;
-  if (!files?.length) {
-    return emits("update:modelValue", null);
-  }
-  const file = files[0];
-  emits("update:modelValue", file);
-};
 </script>
 
 <style lang="scss"></style>

@@ -1,78 +1,65 @@
 <template>
-  <UiControl
-    :label="label"
-    :hideMessage="hideMessage"
-    :invalid="!!errorMessage"
-    :message="errorMessage || message"
-    :rightIcon="rightIcon"
-  >
-    <div @focusout="onFocusout" ref="wrapper" tabindex="-1" class="select">
-      <div
-        @keydown.enter="isOpened = !isOpened"
-        class="select__field"
-        tabindex="0"
-        :class="{ select__active: isOpened }"
-        @click="toggle"
-        style="position: relative"
-      >
-        <template v-if="isSearchable">
-          <div v-if="!isOpened" class="select__value">
-            {{ (model?.value ?? model?.name ?? model?.title) || "Не выбрано" }}
-          </div>
-          <input
-            class="select__value"
-            ref="inputRef"
-            @input="$emit('update:searchString', $event.target.value)"
-            :value="searchString"
-            v-if="isOpened"
-            type="text"
-          />
-        </template>
-        <template v-else>
-          <div class="select__value">
-            {{ (model?.value ?? model?.name ?? model?.title) || "Не выбрано" }}
-          </div>
-        </template>
-      </div>
-      <div
-        ref="selectRef"
-        v-if="isOpened"
-        @scroll="handleScroll"
-        class="select__options"
-        @mousedown.prevent
-      >
-        <template v-if="options?.length">
-          <div
-            class="options__item"
-            v-for="option in options"
-            :key="option.id"
-            @mousedown="handleSelect(option)"
-            :class="{ selected: option?.id == model?.id }"
-          >
-            {{ option?.value ?? option?.name ?? option?.title }}
-          </div>
-        </template>
-        <template v-else>
-          <div class="options__notfound">Ничего не найдено</div>
-        </template>
-      </div>
+  <div @focusout="onFocusout" ref="wrapper" tabindex="-1" class="select">
+    <div
+      @keydown.enter="isOpened = !isOpened"
+      class="select__field"
+      tabindex="0"
+      :class="{ select__active: isOpened }"
+      @click="toggle"
+      style="position: relative"
+    >
+      <template v-if="isSearchable">
+        <div v-if="!isOpened" class="select__value">
+          {{ (model?.value ?? model?.name ?? model?.title) || "Не выбрано" }}
+        </div>
+        <input
+          class="select__value"
+          ref="inputRef"
+          @input="$emit('update:searchString', $event.target.value)"
+          :value="searchString"
+          v-if="isOpened"
+          type="text"
+        />
+      </template>
+      <template v-else>
+        <div class="select__value">
+          {{ (model?.value ?? model?.name ?? model?.title) || "Не выбрано" }}
+        </div>
+      </template>
     </div>
-  </UiControl>
+    <div
+      ref="selectRef"
+      v-if="isOpened"
+      @scroll="handleScroll"
+      class="select__options"
+      @mousedown.prevent
+    >
+      <template v-if="options?.length">
+        <div
+          class="options__item"
+          v-for="option in options"
+          :key="option.id"
+          @mousedown="handleSelect(option)"
+          :class="{ selected: option?.id == model?.id }"
+        >
+          {{ option?.value ?? option?.name ?? option?.title }}
+        </div>
+      </template>
+      <template v-else>
+        <div class="options__notfound">Ничего не найдено</div>
+      </template>
+    </div>
+  </div>
 </template>
 <script setup>
 const selectRef = ref();
 const props = defineProps({
-  rightIcon: [String, Object, Array],
-  errorMessage: String,
-  message: String,
-  label: String,
   searchString: String,
   isSearchable: Boolean,
   closeAfterSelect: {
     type: Boolean,
     default: true,
   },
-  hideMessage: Boolean,
   modelValue: {
     type: [Object, Number, String, Array],
   },

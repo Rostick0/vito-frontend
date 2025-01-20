@@ -1,39 +1,35 @@
 <template>
-  <UiControl
-    :label="label"
-    :invalid="!!errorMessage || invalid"
-    :message="errorMessage || message"
-    :rightIcon="rightIcon"
-  >
-    <input
-      v-bind="$attrs"
-      :placeholder="placeholder"
-      class="control__field"
-      :class="size"
-      v-maska
-      :data-maska="maska"
-      :data-maska-tokens="maskaTokens"
-      :data-maska-reversed="dataMaskaReversed"
-      @change="handleChange"
-      @input="handleInput"
-      :value="modelValue"
-    />
-  </UiControl>
+  <!-- {{ $attrs }} -->
+  <input
+    class="control__field p-3"
+    :class="size"
+    :="$attrs"
+    v-maska
+    :data-maska="maska"
+    :data-maska-tokens="maskaTokens"
+    :data-maska-reversed="dataMaskaReversed"
+    @change="handleChange"
+    @input="handleInput"
+    :value="modelValue"
+  />
 </template>
 
 <script setup>
 const emits = defineEmits(["update:modelValue"]);
 const props = defineProps({
-  modelValue: String,
+  modelValue: [String, Number],
   invalid: Boolean,
+  leftIcon: String,
   rightIcon: String,
   message: String,
-  label: String,
-  placeholder: String,
-  maska: String,
-  dataMaskaReversed: Boolean,
+  maska: {
+    type: [String, Array],
+  },
+  dataMaskaReversed: {
+    type: Boolean,
+    default: false,
+  },
   maskaTokens: String,
-  errorMessage: String,
   onChange: Function,
   deps: [Array, Object, String, Number],
   // small | standard | big
@@ -43,6 +39,7 @@ const props = defineProps({
   },
   forceDeps: Boolean,
 });
+
 function handleInput(event) {
   emits("update:modelValue", event.target.value || undefined);
 }
@@ -77,10 +74,23 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-.control__field {
-  border-radius: 0.33rem;
-  font-size: 1rem;
-  padding: 0.75rem 1.25rem;
-  width: 100%;
+.control {
+  &.invalid {
+    .control__field {
+      border-color: var(--color-red);
+      color: var(--color-red);
+    }
+  }
+
+  &__field {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+
+    &:focus {
+      border-color: var(--color-green);
+    }
+  }
 }
 </style>
