@@ -53,7 +53,7 @@
 <script setup lang="ts">
 import { ROUTES_NAMES } from "~/router/routes";
 interface IProps {
-  headerIsSticky: boolean;
+  headerIsSticky?: boolean;
 }
 
 const props = defineProps<IProps>();

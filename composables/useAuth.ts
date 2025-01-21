@@ -1,7 +1,7 @@
 import type { RouteLocationRaw } from "vue-router";
 // import { NavigateToOptions } from "vue-router";
 import auth from "~/api/auth";
-import type IUser from "~/interfaces/models/User";
+import type { IUser } from "~/interfaces/models/User";
 
 interface IUserserGenerateToken {
   access_token: string;

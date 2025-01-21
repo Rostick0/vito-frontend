@@ -55,7 +55,7 @@ const handleOnFileChange = (e) => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .photoloader {
   &__block {
     background-color: rgb(var(--color-white));

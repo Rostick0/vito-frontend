@@ -118,7 +118,9 @@ const onFocusout = (e) =>
 //   },
 // });
 
-// const redirectToSearch = () => navigateTo(`/search?search=${search.value}`);
+const products = []
+
+const redirectToSearch = () => {};
 
 // watch(
 //   () => search.value,

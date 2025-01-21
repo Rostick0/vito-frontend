@@ -62,10 +62,7 @@ const debounceHandleScrollToBottom = debounce(
   handleScrollToBottom,
   props.debounceMs
 );
-const debounceHandleScrollToTop = debounce(
-  handleScrollToTop,
-  props.debounceMs
-);
+const debounceHandleScrollToTop = debounce(handleScrollToTop, props.debounceMs);
 
 const debounceHandleSearch = debounce(handleSearch, props.debounceMs);
 

@@ -1,12 +1,20 @@
 <template>
-  <div class="switch" @click="emits('update:modelValue', !modelValue)">
-    <div class="switch__icon" :class="{ active: modelValue }">
-      <div class="switch__icon_circle"></div>
+  <div
+    class="switch cursor-pointer inline-flex items-center gap-x-2.5"
+    @click="emits('update:modelValue', !modelValue)"
+  >
+    <div
+      class="switch__icon rounded-2xl flex items-center shrink-0 relative duration-300 w-10 h-5"
+      :class="{ active: modelValue }"
+    >
+      <div
+        class="switch__icon_circle rounded-full absolute duration-300 w-3.5 h-3.5"
+      ></div>
     </div>
     <div class="switch__label">
-      <template v-if="title">
+      <span class="text-sm" v-if="title">
         {{ title }}
-      </template>
+      </span>
       <template v-else>
         <slot />
       </template>
@@ -25,41 +33,22 @@ const emits = defineEmits(["update:modelValue"]);
 
 <style lang="scss" scoped>
 .switch {
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  column-gap: 10px;
-
   &__icon {
-    border: 1px solid rgb(var(--color-blue-light));
-    border-radius: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    position: relative;
-    transition: 0.3s;
-    width: 40px;
-    height: 20px;
+    background-color: white;
 
     &.active {
-      background-color: rgb(var(--color-blue-light));
+      background-color: rgb(56, 189, 248);
 
       .switch__icon_circle {
-        background-color: rgb(var(--color-white));
+        background-color: white;
         left: calc(100% - 3px);
         transform: translateX(-100%);
       }
     }
 
     &_circle {
-      background-color: rgb(var(--color-blue-light));
-      border-radius: 50%;
-      transition: 0.3s;
-      position: absolute;
+      background-color: rgb(56, 189, 248);
       left: 3px;
-      width: 14px;
-      height: 14px;
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="control"
+    class="flex flex-col gap-y-2 w-full"
     :class="[
       { invalid },
       { valid },
@@ -29,7 +29,7 @@
         <slot name="rightIcon" />
       </div>
     </div>
-    <div class="control__message" v-if="message" :class="[{ show: !!message }]">
+    <div class="text-sm" v-if="message" :class="[{ show: !!message }]">
       {{ message }}
     </div>
   </div>
@@ -55,15 +55,4 @@ interface Props extends /* @vue-ignore */ InputHTMLAttributes {
 defineProps<Props>();
 </script>
 
-<style lang="scss" scoped>
-.control {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
-  width: 100%;
-
-  &__message {
-    font-size: 0.875rem;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

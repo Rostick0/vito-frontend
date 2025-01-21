@@ -1,8 +1,7 @@
 <template>
   <!-- {{ $attrs }} -->
   <input
-    class="control__field p-3"
-    :class="size"
+    class="border-2 border-transparent rounded-lg text-base relative px-3 py-2 w-full focus:border-sky-400"
     :="$attrs"
     v-maska
     :data-maska="maska"
@@ -32,8 +31,6 @@ const props = defineProps({
   maskaTokens: String,
   onChange: Function,
   deps: [Array, Object, String, Number],
-  // small | standard | big
-  size: String,
   onDepsChange: {
     type: Function,
   },
@@ -74,23 +71,23 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-.control {
-  &.invalid {
-    .control__field {
-      border-color: var(--color-red);
-      color: var(--color-red);
-    }
-  }
+// .control {
+//   &.invalid {
+//     .control__field {
+//       border-color: var(--color-red);
+//       color: var(--color-red);
+//     }
+//   }
 
-  &__field {
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    font-size: 16px;
-    width: 100%;
+//   &__field {
+//     background-color: #f5f5f5;
+//     border-radius: 8px;
+//     font-size: 16px;
+//     width: 100%;
 
-    &:focus {
-      border-color: var(--color-green);
-    }
-  }
-}
+//     &:focus {
+//       border-color: var(--color-green);
+//     }
+//   }
+// }
 </style>

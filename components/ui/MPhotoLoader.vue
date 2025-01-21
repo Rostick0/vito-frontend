@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col gap-y-2">
+  <div class="photoloader__images" @mouseup="dragElem = null">
     <label
       class="control__photoloader photoloader__block"
-      :class="{ error: errorMessage || invalid }"
+      :class="{ error: errorMessage }"
     >
       <input
         @change="handleOnFileChange"
@@ -10,18 +10,15 @@
         v-bind="$attrs"
         class="photoloader__input"
         type="file"
-        accept="image/webp,image/png,image/jpeg,image/jpg,image/gif"
+        accept="image/png,image/jpeg,image/jpg"
       />
-      <!-- <img class='photoloader__image' src="/img/icons/upload.svg" alt="" /> -->
-      <div class="photoloader__title">Нажмите для загрузки фото</div>
-      <div class="photoloader__subtitle">PNG, JPG, GIF максимум 3MB</div>
+      <span class="photoloader__block_content">
+        <IconPhoto />
+        <strong class="photoloader__title text-xs">Добавить фото</strong>
+      </span>
     </label>
-    <div
-      class="photoloader__images"
-      v-if="modelValue?.length"
-      @mouseup="dragElem = null"
-    >
-      <template v-for="item in modelValue" :key="item.id">
+    <template v-for="item in modelValue" :key="item.id">
+      <div>
         <div @mousedown="dragElem = item">
           <UiDraggable>
             <template #willselect>
@@ -39,28 +36,30 @@
                 >
                   ✖
                 </div>
-                <img
+                <NuxtImg
                   class="photoloader__img"
                   :src="item?.path"
-                  alt="Ошибка загрузки"
-                  v-lazy-load
+                  alt="Error"
+                  loading="lazy"
+                  width="154"
+                  height="96"
                 />
               </div>
             </template>
             <template #selected>
               <img
-                class="flex"
+                class="photoloader__img_drag"
                 :src="item?.path"
-                alt="Ошибка загрузки"
+                alt="Error"
                 v-lazy-load
-                width="200"
-                height="132"
+                width="154"
+                height="99"
               />
             </template>
           </UiDraggable>
         </div>
-      </template>
-    </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -77,9 +76,8 @@ const emits = defineEmits(["update:modelValue", "remove", "setError"]);
 
 const props = defineProps({
   modelValue: [String, Object, Array],
-  invalid: Boolean,
-  rightIcon: String,
-  message: String,
+  label: String,
+  placeholder: String,
   errorMessage: String,
   onChange: Function,
 });
@@ -138,19 +136,27 @@ const handleRemove = (item) => {
 <style lang="scss" scoped>
 .photoloader {
   &__block {
-    background-color: rgb(var(--color-white));
-    border-radius: 10px;
+    background-color: rgb(209, 213, 219);
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2.5rem;
+    flex-shrink: 0;
     position: relative;
-    text-align: center;
     transition: 0.3s;
-    width: 100%;
-    height: 250px;
+    width: 154px;
+    height: 96px;
+
+    &_content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      row-gap: 6px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 
   &__block.error {
@@ -168,35 +174,25 @@ const handleRemove = (item) => {
   }
 
   &__title {
-    color: rgb(var(--color-dark));
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
-    z-index: 2;
-  }
-
-  &__subtitle {
-    color: rgb(var(--color-dark));
-    font-size: 0.75rem;
     z-index: 2;
   }
 
   &__images {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 200px);
-    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, 154px);
+    grid-gap: 16px;
     width: 100%;
   }
 
   &__image {
-    border-radius: 12px;
-    padding-top: 66%;
     position: relative;
+    width: 154px;
+    height: 96px;
 
     &_delete {
-      background-color: rgb(var(--color-white));
-      color: rgb(var(--color-red));
-      border-radius: 4px;
+      background-color: white;
+      color: red;
+      border-radius: 0.33rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -216,15 +212,23 @@ const handleRemove = (item) => {
   }
 
   &__img {
-    border-radius: 0.33rem;
-    user-select: none;
+    border-radius: 8px;
     pointer-events: none;
+    user-select: none;
     object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+
+    &_drag {
+      border-radius: 8px;
+      object-fit: cover;
+      width: 154px;
+      height: 96px;
+      z-index: 10;
+    }
   }
 }
 </style>

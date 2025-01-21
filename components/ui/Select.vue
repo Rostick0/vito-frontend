@@ -10,7 +10,11 @@
     >
       <template v-if="isSearchable">
         <div v-if="!isOpened" class="select__value">
-          {{ (model?.value ?? model?.name ?? model?.title) || "Не выбрано" }}
+          {{
+            (model?.value ?? model?.name ?? model?.title) ||
+            placeholder ||
+            "Не выбрано"
+          }}
         </div>
         <input
           class="select__value"
@@ -23,7 +27,11 @@
       </template>
       <template v-else>
         <div class="select__value">
-          {{ (model?.value ?? model?.name ?? model?.title) || "Не выбрано" }}
+          {{
+            (model?.value ?? model?.name ?? model?.title) ||
+            placeholder ||
+            "Не выбрано"
+          }}
         </div>
       </template>
     </div>
@@ -51,6 +59,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 const selectRef = ref();
 const props = defineProps({
@@ -63,6 +72,7 @@ const props = defineProps({
   modelValue: {
     type: [Object, Number, String, Array],
   },
+  placeholder: String,
   options: Array,
 
   modelValueIsNumber: {
@@ -70,7 +80,11 @@ const props = defineProps({
     type: Boolean,
   },
 });
-const emits = defineEmits(["scrolledTop", "scrolledBottom"]);
+const emits = defineEmits([
+  "update:modelValue",
+  "scrolledTop",
+  "scrolledBottom",
+]);
 
 const model = computed({
   get() {
@@ -170,8 +184,8 @@ const handleScroll = (event) => {
   }
 
   &__value {
-    background-color: rgb(var(--color-white));
-    border-radius: 0.33rem;
+    background-color: white;
+    border-radius: 0.5rem;
     font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
@@ -185,12 +199,12 @@ const handleScroll = (event) => {
       transition: 0.3s;
 
       &:hover {
-        background-color: rgb(var(--color-blue-light));
-        color: rgb(var(--color-white));
+        background-color: rgb(56, 189, 248);
+        color: white;
       }
       &.selected {
-        background-color: rgb(var(--color-dark));
-        color: rgb(var(--color-white));
+        background-color: black;
+        color: white;
       }
     }
 
@@ -200,9 +214,9 @@ const handleScroll = (event) => {
   }
 
   &__options {
-    background-color: rgb(var(--color-white));
-    border-radius: 0.33rem;
-    border: 1px solid rgb(var(--color-pre-white));
+    background-color: white;
+    border-radius: 0.5rem;
+    border: 1px solid;
     box-shadow: 0 1px 2px rgba(50, 50, 71, 0.08);
     position: absolute;
     top: 108%;
@@ -210,17 +224,9 @@ const handleScroll = (event) => {
     overflow: auto;
     max-height: 20rem;
     width: 100%;
-    z-index: 1000000;
+    z-index: 10000;
 
-    // border-top-left-radius: 0;
-    // border-top-right-radius: 0;
     div {
-      appearance: none;
-      background-repeat: no-repeat;
-      background-position: right 1.25rem center;
-      background-size: 1rem 0.75rem;
-      // rgb(var(--color-pre-white))
-      border-bottom: 1px solid rgb(var(--color-pre-white));
       display: block;
       font-size: 1rem;
       font-weight: 400;
@@ -234,10 +240,6 @@ const handleScroll = (event) => {
         border-bottom: none;
       }
     }
-
-    // &__option:first-child {
-    //     border: none;
-    // }
   }
 }
 </style>

@@ -7,6 +7,7 @@
   >
     <UiTextarea
       :="$attrs"
+      v-bind="$props"
       class="control__textarea"
       @input="
         $emit(

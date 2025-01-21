@@ -11,19 +11,20 @@
       @update:modelValue="(val) => emits('update:modelValue', val)"
     />
   </UiControl>
-  <!-- <UiSelect
-    @scrolled-bottom="debounceHandleScrollToBottom"
-    @scrolled-top="debounceHandleScrollToTop"
-    v-bind="props"
-    :options="currentOptions"
-    v-model="modelValue"
-    v-model:search-string="searchString"
-    :is-searchable="!!searchFn"
-  /> -->
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const emits = defineEmits(["update:modelValue"]);
+
+interface IProps {
+  label?: string;
+  message?: string;
+  hideMessage?: boolean;
+  errorMessage?: string;
+  rightIcon?: string;
+}
+
+const props = defineProps<IProps>();
 // const props = defineProps({
 //   limit: {
 //     type: Number,

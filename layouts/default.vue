@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 interface IProps {
-  headerIsSticky: boolean;
+  headerIsSticky?: boolean;
 }
 
 const props = withDefaults(defineProps<IProps>(), {

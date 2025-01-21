@@ -1,7 +1,7 @@
 <template>
   <textarea
     :="$attrs"
-    class="control__textarea"
+    class="border-2 border-transparent rounded-lg text-base relative px-3 py-2 w-full focus:border-sky-400 min-h-11"
     v-maska
     :data-maska="maska"
     :data-maska-tokens="maskaTokens"
@@ -57,12 +57,4 @@ onUnmounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-.control__textarea {
-  border-radius: 0.33rem;
-  font-size: 1rem;
-  padding: 0.75rem 1.25rem;
-  width: 100%;
-  min-height: 42.4px;
-}
-</style>
+<style lang="scss" scoped></style>
