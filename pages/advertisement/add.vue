@@ -20,6 +20,7 @@
           <h2 class="font-bold text-2xl mb-4">Характеристики</h2>
           <div class="flex flex-col gap-y-3">
             <VFormComponent :field="vendor" />
+            <VFormComponent v-if="vendor.modelValue" :field="product" />
           </div>
         </div>
         <div class="">
@@ -29,12 +30,32 @@
             <VFormComponent :field="description" />
           </div>
         </div>
+        <div class="">
+          <h2 class="font-bold text-2xl mb-4">Местоположение</h2>
+          <div class="flex flex-col gap-y-3">
+            <VFormComponent :field="organization" />
+            <UiYandexMap
+              :cords="[55.746846, 37.62085]"
+              :functionInit="initMap"
+            />
+          </div>
+        </div>
+        <div class="">
+          <h2 class="font-bold text-2xl mb-4">Продажа</h2>
+          <div class="flex flex-col gap-y-3">
+            <VFormComponent :field="price" />
+          </div>
+        </div>
       </div>
 
-      <div class="flex gap-x-2">
-        <UiBtn>Создать и опубликовать</UiBtn>
-        <UiBtn bgColor="bg-gray-300" color="text-black" @click.prevent
-          >Сохранить как чероновик</UiBtn
+      <div class="flex flex-wrap gap-x-2 gap-y-3 max-w-md">
+        <UiBtn class="grow justify-center">Создать и опубликовать</UiBtn>
+        <UiBtn
+          class="grow justify-center"
+          bgColor="bg-gray-300"
+          color="text-black"
+          @click.prevent
+          >Сохранить черновик</UiBtn
         >
       </div>
     </form>
@@ -45,7 +66,69 @@
 import { useForm } from "vee-validate";
 import api from "~/api";
 
-const showIndex = ref(0);
+const offices = [
+  {
+    id: 1,
+    name: "Башня Федерация",
+    address: "Пресненская наб., 12, Москва",
+    coordinates: [55.747774, 37.540169],
+  },
+  {
+    id: 2,
+    name: "Бизнес-центр «Москва-Сити»",
+    address: "1-й Красногвардейский пр-д, 21, стр. 2, Москва",
+    coordinates: [55.745314, 37.534392],
+  },
+  {
+    id: 3,
+    name: "Домников Бизнес Центр",
+    address: "ул. Домодедовская, 20к2, Москва",
+    coordinates: [55.608699, 37.717153],
+  },
+  {
+    id: 4,
+    name: "Офисный центр «Белые Сады»",
+    address: "Ленинградский просп., 47, Москва",
+    coordinates: [55.781123, 37.561648],
+  },
+  {
+    id: 5,
+    name: "Даниловский Форт",
+    address: "Варшавское ш., 9, Москва",
+    coordinates: [55.708237, 37.624609],
+  },
+  {
+    id: 6,
+    name: "Бизнес-парк «Румянцево»",
+    address: "Киевское шоссе, 22-й км, вл4с2, Москва",
+    coordinates: [55.643209, 37.425598],
+  },
+  {
+    id: 7,
+    name: "Бизнес-центр «Омега Плаза»",
+    address: "Ленинская слобода, 19, Москва",
+    coordinates: [55.710674, 37.656503],
+  },
+  {
+    id: 8,
+    name: "Бизнес-центр «Новоспасский двор»",
+    address: "Кожевническая ул., 14, стр. 5, Москва",
+    coordinates: [55.728909, 37.649321],
+  },
+  {
+    id: 9,
+    name: "Офисный комплекс «W Plaza II»",
+    address: "Очаковское ш., 34, стр. 2, Москва",
+    coordinates: [55.677528, 37.451733],
+  },
+  {
+    id: 10,
+    name: "Бизнес-центр «Арма»",
+    address: "Нижняя Сыромятническая ул., 10, стр. 10, Москва",
+    coordinates: [55.753423, 37.668158],
+  },
+];
+
 const { handleSubmit } = useForm<any>();
 
 const title = ref({
@@ -90,12 +173,36 @@ const vendor = ref({
   bind: {
     label: "Производитель",
     placeholder: "Выберите производителя вашей техники",
-    options: [
-      { id: 1, name: "123" },
-      { id: 2, name: "ads" },
-    ],
+    searchFn: fetchVendor,
+    // options: [
+    //   { id: 1, name: "123" },
+    //   { id: 2, name: "ads" },
+    // ],
   },
 });
+
+const product = ref({
+  type: "select",
+  name: "product",
+  modelValue: null,
+
+  bind: {
+    label: "Наименование",
+    placeholder: "Выберите название товара",
+    searchFn: fetchProduct,
+    // options: [
+    //   { id: 1, name: "123" },
+    //   { id: 2, name: "ads" },
+    // ],
+  },
+});
+
+watch(
+  () => vendor.value.modelValue,
+  (cur) => {
+    product.value.modelValue = null;
+  }
+);
 
 const images = ref({
   type: "multiple-photo-loader",
@@ -121,6 +228,38 @@ const description = ref({
   },
 });
 
+const organization = ref({
+  type: "select",
+  name: "organization",
+  modelValue: null,
+
+  bind: {
+    label: "Организация",
+    placeholder: "Выберите организавцию, куда будете доставлять",
+    // searchFn: fetchVendor,
+    options: offices,
+    // options: [
+    //   { id: 1, name: "123" },
+    //   { id: 2, name: "ads" },
+    // ],
+  },
+});
+
+const price = ref({
+  type: "text",
+  name: "price",
+  modelValue: "",
+
+  bind: {
+    label: "Цена (в рублях)",
+    placeholder: "Укажите желаемую стоимость",
+    // type: "number",
+    maska: "S#",
+    maskaTokens: "S:[0-9]:multiple",
+    maskaReversed: true,
+  },
+});
+
 const onSubmit = handleSubmit(async (values) => {
   //   const resErrors = await login(values);
   console.log(values);
@@ -135,12 +274,80 @@ const onSubmit = handleSubmit(async (values) => {
 // ) {
 //   return await api.categories.getAll({
 //     params: {
-//       "filterLIKE[name]": searchString,
+//       "filter[name][like]": searchString,
 //       limit,
 //       page,
 //     },
 //   });
 // }
+
+async function fetchVendor(
+  _: any,
+  searchString: string,
+  limit: number,
+  page: number
+) {
+  return await api.vendors.getAll({
+    params: {
+      "filter[name][like]": searchString,
+      limit,
+      page,
+    },
+  });
+}
+
+async function fetchProduct(
+  _: any,
+  searchString: string,
+  limit: number,
+  page: number
+) {
+  return await api.products.getAll({
+    params: {
+      "filter[name][like]": searchString,
+      "filter[vendor_id]": vendor.value.modelValue?.id,
+      limit,
+      page,
+    },
+  });
+}
+
+const mapTo = ref();
+const initMap = (maps: any, myMap: any) => {
+  const pointers = offices;
+
+  pointers.forEach((pointer) => {
+    const place = new maps.Placemark(pointer?.coordinates, {
+      iconCaption: pointer?.name,
+      balloonContentBody: pointer?.address,
+      data: pointer,
+    });
+    myMap.geoObjects.add(place);
+  });
+
+  myMap.geoObjects.events.add("click", function (e: any) {
+    // Получим ссылку на геообъект, по которому кликнул пользователь.
+    var target = e.get("target");
+    const data = target?.properties?._data?.data;
+
+    organization.value.modelValue = data;
+
+    // Переместим центр карты по координатам метки с учётом заданных отступов.
+    myMap.panTo(target.geometry.getCoordinates(), { useMapMargin: true });
+  });
+
+  mapTo.value = (coords: number[]) =>
+    myMap.panTo(coords, { useMapMargin: true });
+};
+
+watch(
+  () => organization.value.modelValue,
+  (cur) => {
+    if (!cur) return;
+
+    mapTo.value(cur?.coordinates);
+  }
+);
 
 useHead({
   title: "Вход в аккаунт",

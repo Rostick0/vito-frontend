@@ -37,7 +37,7 @@ const props = defineProps({
   },
   debounceMs: {
     type: [Number, String],
-    default: 0,
+    default: 400,
   },
   forceDeps: Boolean,
 });
@@ -132,6 +132,7 @@ async function handleSearch(_searchString) {
     page.value
   );
 
+  if (!options) return;
   currentOptions.value = [...options];
 }
 

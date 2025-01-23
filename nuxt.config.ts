@@ -49,9 +49,18 @@ export default defineNuxtConfig({
     directiveOnly: true,
   },
 
-  ssr: false, // Отключаем SSR для полной статики
-  nitro: {
-    preset: "static", // Указываем, что хотим получить статику
+  // ssr: false, // Отключаем SSR для полной статики
+  // nitro: {
+  //   preset: "static", // Указываем, что хотим получить статику
+  // },
+
+  runtimeConfig: {
+    public: {
+      BASE_URL: process.env.BASE_URL,
+      API_URL: process.env.API_URL,
+      // BACK_URL: process.env.BACK_URL,
+      // NOCAPTCHA_SITEKEY: process.env.NOCAPTCHA_SITEKEY,
+    },
   },
 
   imports: {

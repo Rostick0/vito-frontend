@@ -20,7 +20,9 @@
         </div>
       </div>
     </div>
-    <UiBtn class="justify-center w-full">Написать</UiBtn>
+    <UiBtn class="justify-center w-full" v-if="$device?.isMobile"
+      >Написать</UiBtn
+    >
   </div>
 </template>
 

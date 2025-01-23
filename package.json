@@ -25,7 +25,8 @@
     "vee-validate": "^4.15.0",
     "vue": "latest",
     "vue-router": "latest",
-    "vue-toastification": "^2.0.0-rc.5"
+    "vue-toastification": "^2.0.0-rc.5",
+    "ymaps": "^0.2.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.13",
