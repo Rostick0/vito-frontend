@@ -81,6 +81,7 @@ const props = defineProps({
   },
 });
 const emits = defineEmits([
+  "update:searchString",
   "update:modelValue",
   "scrolledTop",
   "scrolledBottom",

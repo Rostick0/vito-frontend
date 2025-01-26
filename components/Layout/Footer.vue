@@ -27,6 +27,4 @@
   </footer>
 </template>
 
-<script setup lang="ts">
-import { ROUTES_NAMES } from "~/router/routes";
-</script>
+<script lang="ts" setup></script>

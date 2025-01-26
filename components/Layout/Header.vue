@@ -41,7 +41,7 @@
       <NuxtLink
         v-if="$device.isDesktop"
         class="flex gap-x-2 items-center self-center font-semibold ml-8 whitespace-nowrap"
-        to="#"
+        :to="ROUTES_NAMES.advertisementAdd"
       >
         <IconWindowAdd />
         <span>Разместить объявление</span>
@@ -51,7 +51,6 @@
 </template>
 
 <script setup lang="ts">
-import { ROUTES_NAMES } from "~/router/routes";
 interface IProps {
   headerIsSticky?: boolean;
 }

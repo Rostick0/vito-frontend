@@ -32,7 +32,7 @@ export default async () => {
       setUser(resp?.data);
 
       if (isRedirect) {
-        navigateTo(ROUTES_NAMES.profile);
+        // navigateTo(ROUTES_NAMES.profile);
       }
     } catch (error) {
       console.error(error);

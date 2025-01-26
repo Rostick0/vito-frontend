@@ -3,4 +3,5 @@ export const ROUTES_NAMES = {
   login: "/login",
   favorites: "/favorites",
   notifications: "/notifications",
+  advertisementAdd: "/advertisement/add",
 };

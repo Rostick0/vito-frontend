@@ -21,6 +21,10 @@
           <div class="flex flex-col gap-y-3">
             <VFormComponent :field="vendor" />
             <VFormComponent v-if="vendor.modelValue" :field="product" />
+            <AdvertisementFormProperties
+              v-if="properties?.length"
+              :properties="properties"
+            />
           </div>
         </div>
         <div class="">
@@ -174,10 +178,6 @@ const vendor = ref({
     label: "Производитель",
     placeholder: "Выберите производителя вашей техники",
     searchFn: fetchVendor,
-    // options: [
-    //   { id: 1, name: "123" },
-    //   { id: 2, name: "ads" },
-    // ],
   },
 });
 
@@ -190,17 +190,43 @@ const product = ref({
     label: "Наименование",
     placeholder: "Выберите название товара",
     searchFn: fetchProduct,
-    // options: [
-    //   { id: 1, name: "123" },
-    //   { id: 2, name: "ads" },
-    // ],
   },
+});
+
+const { data: properties, get: getProperties } = await useApi<IProperty[]>({
+  apiName: "properties",
+  apiMethod: "getAll",
+  params: {
+    expand: "productProperties.propertyValue",
+    "filter[is_specified]": 1,
+  },
+  // filters
 });
 
 watch(
   () => vendor.value.modelValue,
   (cur) => {
     product.value.modelValue = null;
+  }
+);
+
+watch(
+  () => product.value.modelValue,
+  (cur) => {
+    if (!cur) return (properties.value = []);
+
+    getProperties(
+      {},
+      {
+        "filter[productProperties.product_id]": cur?.id,
+      }
+    );
+    // api.properties.getAll({
+    //   params: {
+    //     "filter[productProperties.product_id]": cur?.id,
+    //     "filter[is_specified]": 1,
+    //   },
+    // });
   }
 );
 
@@ -238,10 +264,6 @@ const organization = ref({
     placeholder: "Выберите организавцию, куда будете доставлять",
     // searchFn: fetchVendor,
     options: offices,
-    // options: [
-    //   { id: 1, name: "123" },
-    //   { id: 2, name: "ads" },
-    // ],
   },
 });
 
@@ -260,11 +282,26 @@ const price = ref({
   },
 });
 
-const onSubmit = handleSubmit(async (values) => {
-  //   const resErrors = await login(values);
-  console.log(values);
-  //   errorMessage.value = resErrors?.message;
-});
+const onSubmit = handleSubmit(
+  async ({
+    product,
+    properties_products,
+    vendor,
+    ...values
+  }: IAdvertisementSubmit) => {
+    //   const resErrors = await login(values);
+    // console.log(values);
+    const data = {
+      ...values,
+      properties_products: properties_products?.map((item) => item?.id),
+      product_id: product?.id,
+    } as IAdvertisementCreate;
+
+    // console.log(data);
+    const res = await api.advertisements.create({ data });
+    //   errorMessage.value = resErrors?.message;
+  }
+);
 
 // async function fetchCategory(
 //   _: any,

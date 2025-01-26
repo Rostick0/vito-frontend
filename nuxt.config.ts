@@ -64,11 +64,6 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: [
-      "interfaces",
-      "interfaces/models",
-      "interfaces/utils",
-      "router/routes",
-    ],
+    dirs: ["interfaces", "interfaces/models", "interfaces/utils", "router"],
   },
 });
