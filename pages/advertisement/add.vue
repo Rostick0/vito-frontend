@@ -37,7 +37,7 @@
         <div class="">
           <h2 class="font-bold text-2xl mb-4">Местоположение</h2>
           <div class="flex flex-col gap-y-3">
-            <VFormComponent :field="organization" />
+            <VFormComponent :field="office" />
             <UiYandexMap
               :cords="[55.746846, 37.62085]"
               :functionInit="initMap"
@@ -254,9 +254,9 @@ const description = ref({
   },
 });
 
-const organization = ref({
+const office = ref({
   type: "select",
-  name: "organization",
+  name: "office",
   modelValue: null,
 
   bind: {
@@ -289,6 +289,7 @@ const onSubmit = handleSubmit(
     images,
     product,
     properties_products,
+    office,
     vendor,
     ...values
   }: IAdvertisementSubmit) => {
@@ -299,8 +300,9 @@ const onSubmit = handleSubmit(
     const data = {
       ...values,
       images: images_load,
-      properties_products: properties_products?.map((item) => item?.id),
       product_id: product?.id,
+      properties_products: properties_products?.map((item) => item?.id),
+      office_id: office?.id,
     } as IAdvertisementCreate;
 
     // console.log(data);
@@ -373,7 +375,7 @@ const initMap = (maps: any, myMap: any) => {
     var target = e.get("target");
     const data = target?.properties?._data?.data;
 
-    organization.value.modelValue = data;
+    office.value.modelValue = data;
 
     // Переместим центр карты по координатам метки с учётом заданных отступов.
     myMap.panTo(target.geometry.getCoordinates(), { useMapMargin: true });
@@ -384,7 +386,7 @@ const initMap = (maps: any, myMap: any) => {
 };
 
 watch(
-  () => organization.value.modelValue,
+  () => office.value.modelValue,
   (cur) => {
     if (!cur) return;
 

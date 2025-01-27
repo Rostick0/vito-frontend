@@ -47,7 +47,7 @@
           <div class="shrink-0 w-12 h-12">
             <img
               class="object-contain"
-              :scr="product?.main_image?.image?.path_webp"
+              :scr="product?.mainImage?.image?.path_webp"
               :alt="product?.title"
               decoding="async"
               loading="lazy"

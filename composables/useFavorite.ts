@@ -1,20 +1,20 @@
 export default () => {
   // console.log(useCookie())
-  const favoriteProductIds = useState("favoriteProductIds", () => new Map());
+  const favoriteAdvertisementIds = useState("favoriteAdvertisementIds", () => new Map());
   type typeId = string | number;
 
-  const favoriteAdd = (id: typeId) => favoriteProductIds.value.set(id, true);
+  const favoriteAdd = (id: typeId) => favoriteAdvertisementIds.value.set(id, true);
 
-  const favoriteHas = (id: typeId) => favoriteProductIds.value.has(id);
+  const favoriteHas = (id: typeId) => favoriteAdvertisementIds.value.has(id);
 
-  // (favoriteProductIds.value[id] = true);
-  const favoriteRemove = (id: typeId) => favoriteProductIds.value.delete(id);
+  // (favoriteAdvertisementIds.value[id] = true);
+  const favoriteRemove = (id: typeId) => favoriteAdvertisementIds.value.delete(id);
 
   const favoriteToggle = (id: typeId) =>
     favoriteHas(id) ? favoriteRemove(id) : favoriteAdd(id);
 
   return {
-    favoriteProductIds,
+    favoriteAdvertisementIds,
     favoriteAdd,
     favoriteHas,
     favoriteRemove,

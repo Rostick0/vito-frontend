@@ -8,6 +8,8 @@ export interface IAdvertisement {
   user_id: number;
   created_at: Date;
   updated_at: Date;
+  mainImage?: IImage;
+  product?: IProduct;
 }
 
 export interface IAdvertisementSubmit {
@@ -16,6 +18,7 @@ export interface IAdvertisementSubmit {
   description: string;
   is_show: boolean;
   images: File[];
+  office: IOffice;
   product: IProduct;
   vendor: IVendor;
   properties_products: IProductProperty[];
@@ -27,6 +30,7 @@ export interface IAdvertisementCreate {
   description: string;
   is_show: boolean;
   product_id: number;
+  office_id: number;
   images?: string;
   properties_products: number[];
 }
