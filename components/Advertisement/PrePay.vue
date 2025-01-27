@@ -6,11 +6,11 @@
   >
     <div class="flex justify-between mb-3">
       <div class="font-bold text-3xl">
-        {{ formatNumber(product?.price) }}&nbsp;₽
+        {{ formatNumber(advertisement?.price) }}&nbsp;₽
       </div>
-      <button class="flex" @click="favoriteToggle(product?.id)">
+      <button class="flex" @click="favoriteToggle(advertisement?.id)">
         <IconFavorite
-          v-if="favoriteHas(product?.id)"
+          v-if="favoriteHas(advertisement?.id)"
           class="fill-sky-400"
           width="28"
           height="28"
@@ -25,19 +25,19 @@
     </div>
     <div class="mb-3">
       <span class="bg-green-500 text-white rounded py-1 px-1.5">{{
-        product?.raiting
+        advertisement?.product?.raiting
       }}</span
       >&nbsp;<span class="text-green-500"
-        >{{ product?.reviews_count }} отзывов о модели</span
+        >{{ advertisement?.product?.reviews_count }} отзывов о модели</span
       >
     </div>
-    <ProductUser v-if="product?.user" :user="product?.user" />
+    <AdvertisementUser v-if="advertisement?.user" :user="advertisement?.user" />
   </div>
 </template>
 
 <script lang="ts" setup>
 interface IProps {
-  product: IProduct;
+  advertisement: IAdvertisement;
 }
 
 const props = defineProps<IProps>();

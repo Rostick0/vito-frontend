@@ -9,7 +9,10 @@ export interface IAdvertisement {
   created_at: Date;
   updated_at: Date;
   mainImage?: IImage;
+  images?: IImageRel[];
   product?: IProduct;
+  user?: IUser;
+  advertisementProperties?: IAdvertisementProperty[];
 }
 
 export interface IAdvertisementSubmit {

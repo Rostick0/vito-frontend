@@ -8,7 +8,7 @@
       <NuxtImg
         class="backdrop-blur-sm object-contain w-full h-full"
         :src="firstImage?.image?.path"
-        :alt="product?.name"
+        :alt="advertisement?.title"
         preload
         decoding="async"
         loading="lazy"
@@ -22,7 +22,7 @@
       <img
         class="backdrop-blur-sm object-contain w-full h-full"
         :src="image?.image?.path"
-        :alt="product?.name"
+        :alt="advertisement?.title"
         v-lazy-load
         decoding="async"
         loading="lazy"
@@ -36,17 +36,17 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 await import("swiper/css");
 
 interface IProps {
-  product: IProduct;
+  advertisement: IAdvertisement;
   activeSlide?: number;
-  image_rels: IImageRel[];
+  images: IImageRel[];
 }
 
 const props = defineProps<IProps>();
 
 const swiper = ref();
 
-const firstImage = computed(() => props?.image_rels?.[0]);
-const otherImages = computed(() => props?.image_rels?.slice(1, -1));
+const firstImage = computed(() => props?.images?.[0]);
+const otherImages = computed(() => props?.images?.slice(1, -1));
 
 watch(
   () => props.activeSlide,

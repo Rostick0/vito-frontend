@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded-xl">
-    <NuxtLink class="relative flex pt-[100%]" to="/moscow/advert-1">
+    <NuxtLink class="relative flex pt-[100%]" :to="link">
       <div class="absolute top-0 w-full h-full">
         <img
           class="object-cover w-full h-full"
@@ -16,11 +16,9 @@
     </NuxtLink>
     <div class="p-4">
       <div class="flex gap-x-2 items-start justify-between mb-1">
-        <NuxtLink
-          class="font-bold text-sm text-sky-400"
-          to="/moscow/advert-1"
-          >{{ advertisement?.title }}</NuxtLink
-        >
+        <NuxtLink class="font-bold text-sm text-sky-400" :to="link">{{
+          advertisement?.title
+        }}</NuxtLink>
         <button class="flex" @click="favoriteToggle(advertisement?.id)">
           <IconFavorite
             v-if="favoriteHas(advertisement?.id)"
@@ -44,4 +42,8 @@ interface IProps {
 const props = defineProps<IProps>();
 
 const { favoriteHas, favoriteToggle } = useFavorite();
+
+const link = computed(() =>
+  getLinkAdvertisement("moscow", props.advertisement)
+);
 </script>

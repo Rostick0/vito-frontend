@@ -1,6 +1,13 @@
 import useFetcher from "../../utils/fetch";
 
 export interface IProductMethods {
+  get: ({
+    id,
+    params,
+  }: {
+    id: number | string;
+    params?: any;
+  }) => Promise<IProduct>;
   getAll: ({ params }?: { params?: any }, header?: any) => Promise<IProduct[]>;
   // create: ({
   //   data,
@@ -19,6 +26,7 @@ export interface IProductMethods {
 }
 
 export default <IProductMethods>{
+  get: async ({ id, params }) => useFetcher().get(`/products/${id}`, params),
   getAll: async ({ params = {} } = {}, headers) =>
     useFetcher().get(`/products`, params, headers),
   // create: async ({ data }) => useFetcher().post(`/favorites`, data),

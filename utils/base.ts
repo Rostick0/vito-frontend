@@ -152,4 +152,53 @@ export const convertValuesToString = (obj: object) => {
 //   ];
 // }
 
-export const getTgNick = (nickname: string) => "@" + last(nickname?.split(" "));
+export const transliterate = (text: string): string => {
+  const cyrillicToLatin = {
+    а: "a",
+    б: "b",
+    в: "v",
+    г: "g",
+    д: "d",
+    е: "e",
+    ё: "yo",
+    ж: "zh",
+    з: "z",
+    и: "i",
+    й: "y",
+    к: "k",
+    л: "l",
+    м: "m",
+    н: "n",
+    о: "o",
+    п: "p",
+    р: "r",
+    с: "s",
+    т: "t",
+    у: "u",
+    ф: "f",
+    х: "h",
+    ц: "c",
+    ч: "ch",
+    ш: "sh",
+    щ: "sch",
+    ъ: "",
+    ы: "y",
+    ь: "",
+    э: "e",
+    ю: "yu",
+    я: "ya",
+  };
+
+  return text
+    .split("")
+    .map((char) => cyrillicToLatin?.[char] ?? char)
+    .join("");
+};
+
+export const getLinkAdvertisement = (
+  city: string,
+  advertisement: IAdvertisement
+): string =>
+  `/${encodeURIComponent(city)}/${encodeURIComponent(
+    transliterate(advertisement?.title)
+  )}-${advertisement?.id}`.toLowerCase();

@@ -1,6 +1,4 @@
-import type { IProductProperty } from "./ProductProperty";
-
-export interface AdvertisementProperty {
+export interface IAdvertisementProperty {
   id: number;
   product_property_id: number;
   advertisement_id: number;

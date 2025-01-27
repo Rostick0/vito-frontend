@@ -8,8 +8,9 @@ export interface IProduct {
   created_at: Date;
   mainImage?: IImage;
   category?: ICategory;
-  imageRels?: IImageRel[];
+  images?: IImageRel[];
   reviews_count?: number;
   user?: IUser;
+  vendor?: IVendor;
   properties?: IProductProperty[];
 }
