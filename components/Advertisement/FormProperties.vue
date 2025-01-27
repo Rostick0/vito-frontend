@@ -1,5 +1,4 @@
 <template>
-  {{ fields[0] }}
   <VFormComponent v-for="field in fields" :key="field.name" :field="field" />
 </template>
 

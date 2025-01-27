@@ -2,16 +2,16 @@
 import api from "~/api";
 
 export default () => {
-  const createImage = async (image) => {
+  const createImage = async (image: File) => {
     const formData = new FormData();
 
-    formData.append("image", image);
+    formData.append("imageFile", image);
 
-    const response = await api.image.create({
+    const response = await api.images.create({
       data: formData,
     });
 
-    return await response.data;
+    return await response;
   };
 
   const createImages = async (images) => {
@@ -31,7 +31,7 @@ export default () => {
     return data;
   };
 
-  const getImageFrom = async (image) => {
+  const getImageFrom = async (image: File) => {
     if (image?.toString() === "[object File]") {
       const resp = await createImage(image);
 

@@ -2,6 +2,7 @@ import advertisements from "./modules/advertisements";
 import cities from "./modules/cities";
 import emailCode from "./modules/emailCode";
 import favorites from "./modules/favorites";
+import images from "./modules/images";
 import productProperties from "./modules/productProperties";
 import products from "./modules/products";
 import properties from "./modules/properties";
@@ -13,6 +14,7 @@ const api = {
   cities,
   emailCode,
   favorites,
+  images,
   productProperties,
   products,
   properties,

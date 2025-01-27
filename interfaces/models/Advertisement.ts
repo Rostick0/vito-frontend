@@ -15,6 +15,7 @@ export interface IAdvertisementSubmit {
   price: number;
   description: string;
   is_show: boolean;
+  images: File[];
   product: IProduct;
   vendor: IVendor;
   properties_products: IProductProperty[];
@@ -26,4 +27,6 @@ export interface IAdvertisementCreate {
   description: string;
   is_show: boolean;
   product_id: number;
+  images?: string;
+  properties_products: number[];
 }

@@ -233,7 +233,7 @@ watch(
 const images = ref({
   type: "multiple-photo-loader",
   name: "images",
-  modelValue: null,
+  modelValue: [],
 
   bind: {
     label: "Фотографии",
@@ -282,8 +282,11 @@ const price = ref({
   },
 });
 
+const { getImageIdsFrom } = useImages();
+
 const onSubmit = handleSubmit(
   async ({
+    images,
     product,
     properties_products,
     vendor,
@@ -291,8 +294,11 @@ const onSubmit = handleSubmit(
   }: IAdvertisementSubmit) => {
     //   const resErrors = await login(values);
     // console.log(values);
+    const images_load = await getImageIdsFrom(images);
+
     const data = {
       ...values,
+      images: images_load,
       properties_products: properties_products?.map((item) => item?.id),
       product_id: product?.id,
     } as IAdvertisementCreate;

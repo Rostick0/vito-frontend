@@ -14,6 +14,13 @@ export const warningPopup = (message: string = "Упс, что-то пошло �
   }
 };
 
+export interface IErrorData {
+  error: boolean;
+  isError: boolean;
+  message: string;
+  errorResponse: any;
+  popup: () => void;
+}
 export function getErrorData(error: any, aborted?: any) {
   try {
     if (aborted) {
