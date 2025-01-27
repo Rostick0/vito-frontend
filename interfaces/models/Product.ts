@@ -12,5 +12,5 @@ export interface IProduct {
   reviews_count?: number;
   user?: IUser;
   vendor?: IVendor;
-  properties?: IProductProperty[];
+  productProperties?: IProductProperty[];
 }

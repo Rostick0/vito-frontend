@@ -1,6 +1,6 @@
 import { useToast } from "vue-toastification";
 import isObject from "lodash/isObject";
-import last from "lodash/last";
+import groupBy from "lodash/groupBy";
 
 const toast = useToast();
 
@@ -202,3 +202,28 @@ export const getLinkAdvertisement = (
   `/${encodeURIComponent(city)}/${encodeURIComponent(
     transliterate(advertisement?.title)
   )}-${advertisement?.id}`.toLowerCase();
+
+export const getPropertyValWithUnit = (value?: number, unit?: string) =>
+  value && (unit ? `${value} ${unit}` : value);
+
+export const getPropertyValue = (productProperty: IProductProperty) => {
+  if (productProperty?.property?.type === "checkbox")
+    return productProperty?.value ? "Есть" : "Нет";
+
+  return (
+    productProperty?.propertyValue?.value ??
+    getPropertyValWithUnit(
+      productProperty?.value,
+      productProperty?.property?.unit
+    )
+  );
+};
+
+export const groupByInArray = (array: [], name: string) => {
+  const group = groupBy(array, name);
+
+  return Object.keys(group).map((el) => ({
+    group: el,
+    value: group[el],
+  }));
+};

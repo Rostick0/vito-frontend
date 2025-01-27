@@ -1,5 +1,23 @@
 <template>
-  <div class="">{{ product }}</div>
+  <!-- <div class="">{{ product }}</div> -->
+  <div class="container mx-auto">
+    <UiH1>{{ product?.name }}</UiH1>
+    <div class="flex flex-col gap-y-4">
+      <div class="" v-for="propertyGroup in groupBy">
+        <UiH3>{{ propertyGroup.group }}</UiH3>
+        <div class="grid gap-2 sm:grid-cols-2">
+          <AdvertisementParamsItem
+            v-for="productProperties in propertyGroup.value"
+            :key="productProperties?.id"
+            :title="productProperties?.property?.name"
+          >
+            {{ getPropertyValue(productProperties) }}
+          </AdvertisementParamsItem>
+        </div>
+      </div>
+    </div>
+    <!-- {{ product?.productProperties }} -->
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -10,7 +28,17 @@ const route = useRoute();
 const product = await api.products.get({
   id: route.params?.id?.toString(),
   params: {
-    expand: ["images.image", "productProperties"].join(","),
+    expand: [
+      "images.image",
+      "productProperties.property.propertyType",
+      "productProperties.property.propertyValues",
+      "productProperties.propertyValue",
+    ].join(","),
   },
 });
+
+const groupBy = groupByInArray(
+  product?.productProperties,
+  "property.propertyType.name"
+);
 </script>

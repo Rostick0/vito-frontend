@@ -46,7 +46,7 @@
                     advertisementProperties?.productProperty?.property?.name as string
                   "
                   >{{
-                    getPropertyValue(advertisementProperties)
+                    getPropertyValue(advertisementProperties?.productProperty)
                   }}</AdvertisementParamsItem
                 >
               </template>
@@ -117,16 +117,6 @@ const advertisement = await api.advertisements.get({
 console.log(advertisement);
 
 if (!advertisement) navigateTo("/404", {});
-
-const getPropertyValWithUnit = (value?: number, unit?: string) =>
-  value && (unit ? `${value} ${unit}` : value);
-
-const getPropertyValue = (advertisementProperties: IAdvertisementProperty) =>
-  advertisementProperties?.productProperty?.propertyValue?.value ??
-  getPropertyValWithUnit(
-    advertisementProperties?.productProperty?.value,
-    advertisementProperties?.productProperty?.property?.unit
-  );
 
 // const product = {
 //   id: 1,
