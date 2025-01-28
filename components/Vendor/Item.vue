@@ -5,7 +5,7 @@
     <div class="font-bold">{{ vendor?.name }}</div>
     <img
       class="object-contain w-10 h-10"
-      :src="vendor?.image_rel?.image?.path"
+      :src="vendor?.image?.image?.path"
       :alt="vendor?.name"
       v-lazy-load
       width="40"

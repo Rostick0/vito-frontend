@@ -1,10 +1,14 @@
 import useFetcher from "../../utils/fetch";
 
 export interface IVendorMethods {
-  getAll: (
-    { params }: { params: any },
-    header?: any
-  ) => Promise<IVendor[]>;
+  getAll: ({ params }: { params: any }, header?: any) => Promise<IVendor[]>;
+  getByName: ({
+    name,
+    params,
+  }: {
+    name: string;
+    params?: any;
+  }) => Promise<IVendor>;
   // create: ({
   //   data,
   // }: {
@@ -24,7 +28,9 @@ export interface IVendorMethods {
 export default <IVendorMethods>{
   getAll: async ({ params }, headers) =>
     useFetcher().get(`/vendors`, params, headers),
+  getByName: async ({ name, params }) =>
+    useFetcher().get(`/vendors/name/${name}`, params),
   // create: async ({ data }) => useFetcher().post(`/favorites`, data),
   // delete: async ({ clinic_id, params }) =>
-    // useFetcher().delete(`/favorites/${clinic_id}`, params),
+  // useFetcher().delete(`/favorites/${clinic_id}`, params),
 };
