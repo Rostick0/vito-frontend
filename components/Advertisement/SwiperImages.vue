@@ -1,4 +1,5 @@
 <template>
+  <!-- {{ activeSlide }} -->
   <Swiper class="w-full h-full" @swiper="(swiperInit) => (swiper = swiperInit)">
     <SwiperSlide>
       <span
@@ -46,7 +47,9 @@ const props = defineProps<IProps>();
 const swiper = ref();
 
 const firstImage = computed(() => props?.images?.[0]);
-const otherImages = computed(() => props?.images?.slice(1, -1));
+const otherImages = computed(() => props?.images?.slice(1));
+console.log(otherImages.value)
+
 
 watch(
   () => props.activeSlide,
