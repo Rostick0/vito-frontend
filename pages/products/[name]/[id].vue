@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="">{{ product }}</div> -->
   <div class="container mx-auto">
     <UiH1>{{ product?.name }}</UiH1>
     <div class="flex flex-col gap-y-4">
@@ -16,7 +15,6 @@
         </div>
       </div>
     </div>
-    <!-- {{ product?.productProperties }} -->
   </div>
 </template>
 

@@ -64,8 +64,8 @@
                 class="text-sky-400"
                 :to="
                   `/products/${encodeURIComponent(
-                    transliterate(advertisement?.product?.name)
-                  )}-${advertisement?.product?.id}`.toLowerCase()
+                    transliterateHref(advertisement?.product?.name)
+                  )}/${advertisement?.product?.id}`.toLowerCase()
                 "
                 >Все характеристики</NuxtLink
               >

@@ -195,13 +195,16 @@ export const transliterate = (text: string): string => {
     .join("");
 };
 
+export const transliterateHref = (str: string) =>
+  transliterate(str)?.replace(/ /g, "-");
+
 export const getLinkAdvertisement = (
   city: string,
   advertisement: IAdvertisement
 ): string =>
   `/${encodeURIComponent(city)}/${encodeURIComponent(
-    transliterate(advertisement?.title)
-  )}-${advertisement?.id}`.toLowerCase();
+    transliterateHref(advertisement?.title)
+  )}/${advertisement?.id}`.toLowerCase();
 
 export const getPropertyValWithUnit = (value?: number, unit?: string) =>
   value && (unit ? `${value} ${unit}` : value);
