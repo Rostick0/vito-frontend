@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <VendorList class="mb-8" :vendors="vendors" />
+    <VendorList v-if="vendors?.length" class="mb-8" :vendors="vendors" />
     <div v-if="newAdvertisements?.length" class="">
       <UiH2>Рекомендации для вас</UiH2>
       <CardAdvertisementList :advertisements="newAdvertisements" />
@@ -14,8 +14,8 @@ const { data: vendors, get: getVendors } = await useApi<IVendor[]>({
   apiMethod: "getAll",
   apiName: "vendors",
   params: {
-    expand: 'image.image'
-  }
+    expand: "image.image",
+  },
 });
 // const vendors = [
 //   {

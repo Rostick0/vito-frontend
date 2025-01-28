@@ -6,7 +6,7 @@
       <div class="flex relative pt-[100%] mb-3 w-full">
         <img
           class="object-contain absolute top-0 left-0 w-full h-full"
-          :src="category?.image_rel?.image?.path"
+          :src="category?.image?.image?.path"
           :alt="category?.name"
           v-lazy-load
           decoding="async"

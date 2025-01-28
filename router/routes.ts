@@ -4,4 +4,5 @@ export const ROUTES_NAMES = {
   favorites: "/favorites",
   notifications: "/notifications",
   advertisementAdd: "/advertisement/add",
+  brands: (name: string) => `/brands/${name}`,
 };

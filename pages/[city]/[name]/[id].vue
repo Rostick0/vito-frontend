@@ -42,6 +42,7 @@
                 v-for="advertisementProperties in advertisement?.advertisementProperties"
               >
                 <AdvertisementParamsItem
+                  v-if="advertisementProperties?.productProperty"
                   :title="
                     advertisementProperties?.productProperty?.property?.name as string
                   "
@@ -50,12 +51,6 @@
                   }}</AdvertisementParamsItem
                 >
               </template>
-              <!-- <AdvertisementParamsItem title="Встроенная память"
-                >256 ГБ</AdvertisementParamsItem
-              >
-              <AdvertisementParamsItem title="Цвет"
-                >Чёрный</AdvertisementParamsItem
-              > -->
               <!-- <AdvertisementParamsItem title="Состояние аккумулятора"
                 >88 %</AdvertisementParamsItem
               > -->

@@ -1,6 +1,7 @@
 <template>
-  <div
+  <NuxtLink
     class="vendor-item rounded-lg bg-white flex gap-x-2 justify-between items-center py-3 px-4 hover:bg-slate-50"
+    :to="ROUTES_NAMES.brands(vendor?.name?.toLowerCase())"
   >
     <div class="font-bold">{{ vendor?.name }}</div>
     <img
@@ -12,7 +13,7 @@
       height="40"
       loading="lazy"
     />
-  </div>
+  </NuxtLink>
 </template>
 
 <script lang="ts" setup>
