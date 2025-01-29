@@ -5,24 +5,49 @@
 <script lang="ts" setup>
 interface IProps {
   properties?: IProperty[];
+  avertisementProperties?: IAdvertisementProperty[];
 }
 
 const props = defineProps<IProps>();
 
-const setFormatProperties = () =>
-  props.properties?.map((property, index) => ({
-    type: "select",
-    name: `properties_products.${index}`,
-    modelValue: null,
+const propertyUsedIdValues = generateObjFromArr<
+  {
+    [_: number]: boolean;
+  },
+  IAdvertisementProperty
+>(props?.avertisementProperties ?? [], (item) => [
+  item?.product_property_id,
+  true,
+]);
+// const propertyUsedIdValues = (() => {
+//   const obj = {} as any;
 
-    bind: {
-      label: property?.name + (property?.unit ? ` (${property?.unit})` : ""),
-      options: property?.productProperties?.map((item) => ({
-        ...item,
-        value: item?.value ?? item?.propertyValue?.value,
-      })),
-    },
-  }));
+//   props?.avertisementProperties?.forEach(
+//     (item) =>
+//       item?.product_property_id && (obj[item?.product_property_id] = true)
+//   );
+
+//   return obj;
+// })();
+
+const setFormatProperties = () =>
+  props.properties?.map((property, index) => {
+    const options = property?.productProperties?.map((item) => ({
+      ...item,
+      value: item?.value ?? item?.propertyValue?.value,
+    }));
+
+    return {
+      type: "select",
+      name: `properties_products.${index}`,
+      modelValue: options?.find((item) => propertyUsedIdValues[item?.id]),
+
+      bind: {
+        label: property?.name + (property?.unit ? ` (${property?.unit})` : ""),
+        options,
+      },
+    };
+  });
 
 const fields = ref(setFormatProperties());
 

@@ -1,5 +1,5 @@
 <template>
-  <AdvertisementForm :onSubmit="onSubmit" />
+  <AdvertisementForm :advertisement="advertisement" :onSubmit="onSubmit" />
 </template>
 
 <script lang="ts" setup>
@@ -18,9 +18,7 @@ const onSubmit = handleSubmit(
     vendor,
     ...values
   }) => {
-    console.log(values);
     // const images_load = await getImageIdsFrom(images);
-
     // const data = {
     //   ...values,
     //   images: images_load,
@@ -28,15 +26,26 @@ const onSubmit = handleSubmit(
     //   properties_products: properties_products?.map((item) => item?.id),
     //   office_id: office?.id,
     // } as IAdvertisementCreate;
-
     // // console.log(data);
     // const res = await api.advertisements.create({ data });
     //   errorMessage.value = resErrors?.message;
   }
 );
 
+const route = useRoute();
+const advertisement = await api.advertisements.get({
+  id: route.params?.id?.toString(),
+  params: {
+    expand: [
+      "product.vendor",
+      "images.image",
+      "advertisementProperties.property",
+    ].join(),
+  },
+});
+
 useHead({
-  title: "Добавление объявления",
+  title: `Редактирование объявления #${advertisement?.id}`,
 });
 
 // definePageMeta({

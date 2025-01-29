@@ -4,6 +4,7 @@ export interface IAdvertisement {
   price: number;
   description: string;
   is_show: boolean;
+  is_new: boolean;
   product_id: number;
   user_id: number;
   created_at: Date;
@@ -13,6 +14,7 @@ export interface IAdvertisement {
   product?: IProduct;
   user?: IUser;
   advertisementProperties?: IAdvertisementProperty[];
+  office?: IOffice;
 }
 
 export interface IAdvertisementSubmit {
@@ -20,6 +22,7 @@ export interface IAdvertisementSubmit {
   price: number;
   description: string;
   is_show: boolean;
+  is_new: boolean;
   images: File[];
   office: IOffice;
   product: IProduct;
@@ -32,6 +35,7 @@ export interface IAdvertisementCreate {
   price: number;
   description: string;
   is_show: boolean;
+  is_new: boolean;
   product_id: number;
   office_id: number;
   images?: string;
