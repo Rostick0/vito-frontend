@@ -109,7 +109,6 @@ const advertisement = await api.advertisements.get({
     ].join(","),
   },
 });
-console.log(advertisement);
 
 if (!advertisement) navigateTo("/404", {});
 

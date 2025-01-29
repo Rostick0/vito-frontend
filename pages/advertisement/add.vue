@@ -293,8 +293,6 @@ const onSubmit = handleSubmit(
     vendor,
     ...values
   }: IAdvertisementSubmit) => {
-    //   const resErrors = await login(values);
-    // console.log(values);
     const images_load = await getImageIdsFrom(images);
 
     const data = {

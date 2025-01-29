@@ -17,8 +17,8 @@
     <div v-if="vendorCategories?.length" class="mt-6">
       <CategoryList :categories="vendorCategories" />
     </div>
-    <div v-if="advertisements" class="mt-6">
-      <UiH2>Рекомендации для вас</UiH2>
+    <div v-if="advertisements?.length" class="mt-6">
+      <UiH2>Товары бренда</UiH2>
       <CardAdvertisementList :advertisements="advertisements" />
     </div>
   </div>
@@ -52,6 +52,4 @@ const vendorCategories = vendor?.vendorCategories?.map((item) => ({
   ...item?.category,
   image: item?.image,
 })) as ICategory[];
-
-console.log(vendor);
 </script>

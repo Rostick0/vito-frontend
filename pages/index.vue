@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <VendorList v-if="vendors?.length" class="mb-8" :vendors="vendors" />
     <div v-if="newAdvertisements?.length" class="">
-      <UiH2>Рекомендации для вас</UiH2>
+      <UiH2>Новинки</UiH2>
       <CardAdvertisementList :advertisements="newAdvertisements" />
       <!-- <CardProductList :products="products" /> -->
     </div>

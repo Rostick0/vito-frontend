@@ -1,5 +1,4 @@
 export default () => {
-  // console.log(useCookie())
   const favoriteAdvertisementIds = useState("favoriteAdvertisementIds", () => new Map());
   type typeId = string | number;
 
