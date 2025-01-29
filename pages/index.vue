@@ -4,7 +4,6 @@
     <div v-if="newAdvertisements?.length" class="">
       <UiH2>Новинки</UiH2>
       <CardAdvertisementList :advertisements="newAdvertisements" />
-      <!-- <CardProductList :products="products" /> -->
     </div>
   </div>
 </template>
@@ -17,59 +16,6 @@ const { data: vendors, get: getVendors } = await useApi<IVendor[]>({
     expand: "image.image",
   },
 });
-// const vendors = [
-//   {
-//     id: 1,
-//     name: "Apple",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-apple.png" } },
-//   },
-//   {
-//     id: 2,
-//     name: "Asus",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-asus.png" } },
-//   },
-//   {
-//     id: 3,
-//     name: "Acer",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-acer.png" } },
-//   },
-//   {
-//     id: 4,
-//     name: "Hp",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-hp.png" } },
-//   },
-//   {
-//     id: 5,
-//     name: "Xiaomi",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-xiaomi.png" } },
-//   },
-//   {
-//     id: 6,
-//     name: "Samsung",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-samsung.webp" } },
-//   },
-//   {
-//     id: 7,
-//     name: "Chuwi",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-chuwi.png" } },
-//   },
-//   {
-//     id: 8,
-//     name: "HKC",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-hkc.webp" } },
-//   },
-//   {
-//     id: 9,
-//     name: "DELL",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-dell.webp" } },
-//   },
-//   {
-//     id: 10,
-//     name: "Lenovo",
-//     imageRel: { id: 1, image: { id: 1, path: "/images/logo-lenovo.png" } },
-//   },
-//   // { id: 8, name: "Lenovo", imageRel: { id: 1, image: { id: 1, path: "/images/logo-lenovo.png" } }},
-// ] as IVendor[];
 
 const products = [
   {

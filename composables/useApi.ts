@@ -2,13 +2,7 @@ import type { apiNames } from "~/api";
 import api from "~/api";
 import type { initialFiltersItem } from "./useFilters";
 
-// const name = {
-// login: () => {},
-// };
-
 interface iUseApi {
-  // name: `${keyof typeof users}`;
-  // ${keyof apiNames}.
   apiName: apiNames;
   apiMethod: "get" | "getAll";
   params?: object;
