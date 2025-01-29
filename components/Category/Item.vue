@@ -6,8 +6,9 @@
       <div class="flex relative pt-[100%] mb-3 w-full">
         <img
           class="object-contain absolute top-0 left-0 w-full h-full"
-          :src="category?.image?.image?.path"
+          :src="category?.image?.image?.path ?? DEFAULT_IMAGE"
           :alt="category?.name"
+          @error="setDefaultImgSrc"
           v-lazy-load
           decoding="async"
           loading="lazy"

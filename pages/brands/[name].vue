@@ -3,9 +3,10 @@
     <div class="flex items-center gap-x-3">
       <img
         class="object-contain w-16 h-16"
-        :src="vendor?.image?.image?.path"
+        :src="vendor?.image?.image?.path ?? DEFAULT_IMAGE"
         :title="vendor?.name"
         :alt="vendor?.name"
+        @error="setDefaultImgSrc"
         v-lazy-load
         decoding="async"
         loading="lazy"

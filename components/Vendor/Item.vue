@@ -6,8 +6,9 @@
     <div class="font-bold">{{ vendor?.name }}</div>
     <img
       class="object-contain w-10 h-10"
-      :src="vendor?.image?.image?.path"
+      :src="vendor?.image?.image?.path ?? DEFAULT_IMAGE"
       :alt="vendor?.name"
+      @error="setDefaultImgSrc"
       v-lazy-load
       width="40"
       height="40"

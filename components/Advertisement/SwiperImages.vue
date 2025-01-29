@@ -4,11 +4,13 @@
     <SwiperSlide>
       <span
         class="bg-no-repeat bg-center bg-[length:100%_100%] absolute w-full h-full -z-10"
-        :style="{ backgroundImage: `url(${firstImage?.image?.path})` }"
+        :style="{
+          backgroundImage: `url(${firstImage?.image?.path ?? DEFAULT_IMAGE})`,
+        }"
       ></span>
       <NuxtImg
         class="backdrop-blur-sm object-contain w-full h-full"
-        :src="firstImage?.image?.path"
+        :src="firstImage?.image?.path ?? DEFAULT_IMAGE"
         :alt="advertisement?.title"
         preload
         decoding="async"

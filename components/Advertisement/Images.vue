@@ -8,6 +8,15 @@
             v-bind="props"
           />
         </ClientOnly>
+        <img
+          v-else
+          class="backdrop-blur-sm object-contain w-full h-full"
+          :src="DEFAULT_IMAGE"
+          alt="Стандартное изображение"
+          v-lazy-load
+          decoding="async"
+          loading="lazy"
+        />
       </div>
     </div>
     <div v-if="images && images?.length > 1" class="flex gap-x-1 overflow-auto">

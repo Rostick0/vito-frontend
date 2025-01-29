@@ -4,8 +4,9 @@
       <div class="absolute top-0 w-full h-full">
         <img
           class="object-cover w-full h-full"
-          :src="advertisement?.mainImage?.path"
+          :src="advertisement?.mainImage?.path ?? DEFAULT_IMAGE"
           :alt="advertisement?.title"
+          @error="setDefaultImgSrc"
           width="232"
           height="232"
           v-lazy-load
