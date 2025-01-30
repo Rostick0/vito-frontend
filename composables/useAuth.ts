@@ -29,7 +29,7 @@ export default async () => {
         return resp?.errorResponse?.data;
       }
 
-      setUser(resp?.data);
+      setUser(resp);
 
       if (isRedirect) {
         // navigateTo(ROUTES_NAMES.profile);

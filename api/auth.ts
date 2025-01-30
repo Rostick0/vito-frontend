@@ -1,15 +1,20 @@
 import useFetcher from "../utils/fetch";
 
+interface IUserResponse {
+  user: IUser;
+  access_token: string;
+}
+
 interface authMethods {
-  login: (...args: Array<any>) => Promise<any>;
-  register: (...args: Array<any>) => Promise<any>;
+  login: (data: any) => Promise<IUserResponse>;
+  register: (...args: Array<any>) => Promise<IUserResponse>;
   logout: (...args: Array<any>) => Promise<any>;
-  me: (...args: Array<any>) => Promise<any>;
+  me: (...args: Array<any>) => Promise<IUserResponse>;
 }
 
 export default <authMethods>{
-  login: async (data) => useFetcher().post(`/auth/login`, data),
-  register: async (data) => useFetcher().post(`/auth/register`, data),
-  logout: async (data) => useFetcher().post(`/auth/logout`, data),
-  me: async (params, headers) => useFetcher().get(`/auth/me`, params, headers),
+  login: async (data) => useFetcher().post(`/auths/login`, data),
+  register: async (data) => useFetcher().post(`/auths/register`, data),
+  logout: async (data) => useFetcher().post(`/auths/logout`, data),
+  me: async (params, headers) => useFetcher().get(`/auths/me`, params, headers),
 };

@@ -9,6 +9,9 @@ import { useForm } from "vee-validate";
 const { handleSubmit } = useForm<IAdvertisementSubmit>();
 const { getImageIdsFrom } = useImages();
 
+const route = useRoute();
+const id = route.params?.id?.toString();
+
 const onSubmit = handleSubmit(
   async ({
     images,
@@ -18,23 +21,22 @@ const onSubmit = handleSubmit(
     vendor,
     ...values
   }) => {
-    // const images_load = await getImageIdsFrom(images);
-    // const data = {
-    //   ...values,
-    //   images: images_load,
-    //   product_id: product?.id,
-    //   properties_products: properties_products?.map((item) => item?.id),
-    //   office_id: office?.id,
-    // } as IAdvertisementCreate;
-    // // console.log(data);
-    // const res = await api.advertisements.create({ data });
+    const images_load = await getImageIdsFrom(images);
+    const data = {
+      ...values,
+      images: images_load,
+      product_id: product?.id,
+      properties_products: properties_products?.map((item) => item?.id),
+      office_id: office?.id,
+    } as IAdvertisementCreate;
+
+    const res = await api.advertisements.update({ id, data });
     //   errorMessage.value = resErrors?.message;
   }
 );
 
-const route = useRoute();
 const advertisement = await api.advertisements.get({
-  id: route.params?.id?.toString(),
+  id,
   params: {
     expand: [
       "product.vendor",
@@ -45,7 +47,7 @@ const advertisement = await api.advertisements.get({
 });
 
 useHead({
-  title: `Редактирование объявления #${advertisement?.id}`,
+  title: `Редактирование объявления #${id}`,
 });
 
 // definePageMeta({

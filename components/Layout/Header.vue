@@ -17,10 +17,10 @@
             <NuxtLink class="flex" :to="ROUTES_NAMES.notifications">
               <IconNotification class="fill-zinc-200" />
             </NuxtLink>
-            <NuxtLink class="flex gap-x-1" :to="ROUTES_NAMES.login">
+            <button @click="loginOpen" class="flex gap-x-1">
               <IconLogin class="fill-white" />
               <span>Авторизация</span>
-            </NuxtLink>
+            </button>
           </div>
         </div>
       </div>
@@ -48,6 +48,24 @@
       </NuxtLink>
     </div>
   </header>
+
+  <UiModal :name="loginModal">
+    <UiModalContent class="w-full max-w-sm">
+      <AuthModalLogin
+        @activeRegisterForm="loginClose(), registerOpen()"
+        :loginClose="loginClose"
+      />
+    </UiModalContent>
+  </UiModal>
+
+  <UiModal :name="registerModal">
+    <UiModalContent class="w-full max-w-sm">
+      <AuthModalRegister
+        @activeLoginForm="registerClose(), loginOpen()"
+        :registerClose="registerClose"
+      />
+    </UiModalContent>
+  </UiModal>
 </template>
 
 <script setup lang="ts">
@@ -56,4 +74,12 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
+
+const loginModal = "login";
+const registerModal = "register";
+
+const { open: loginOpen, close: loginClose } = useModal({ name: loginModal });
+const { open: registerOpen, close: registerClose } = useModal({
+  name: registerModal,
+});
 </script>

@@ -7,9 +7,8 @@
     z-index="1"
   >
     <!-- @keydown.esc="close" -->
-    <div class="modal__content" :style="style">
-      <slot></slot>
-      <!-- <svg
+    <slot></slot>
+    <!-- <svg
         @click="close"
         class="modal-close"
         :class="`modal-close__${props.position}`"
@@ -27,7 +26,6 @@
           stroke-linejoin="round"
         />
       </svg> -->
-    </div>
     <!-- <div class="back" v-if="isOpen" @click="close"></div> -->
   </div>
 </template>
@@ -64,7 +62,7 @@ watch(
 </script>
 <style scoped lang="scss">
 .modal {
-  background-color: rgba(var(--color-dark), 0.5);
+  background-color: rgba(black, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,9 +73,6 @@ watch(
   width: 100%;
   height: 100%;
   z-index: 9999;
-
-  &__content {
-  }
 }
 
 // .content {

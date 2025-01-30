@@ -13,6 +13,15 @@ export interface IAdvertisementsMethods {
     header?: any
   ) => Promise<IAdvertisement[]>;
   create: ({ data }: { data: IAdvertisementCreate }) => Promise<IAdvertisement>;
+  update: ({
+    id,
+    data,
+    params,
+  }: {
+    id: string | number;
+    data: IAdvertisementCreate;
+    params?: Record<string, any>;
+  }) => Promise<IAdvertisement>;
 }
 
 export default <IAdvertisementsMethods>{
@@ -21,4 +30,6 @@ export default <IAdvertisementsMethods>{
   getAll: async ({ params }, headers) =>
     useFetcher().get(`/advertisements`, params, headers),
   create: async ({ data }) => useFetcher().post(`/advertisements`, data),
+  update: async ({ id, data, params = {} }) =>
+    useFetcher().patch(`/advertisements/${id}`, data, params),
 };

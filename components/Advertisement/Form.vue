@@ -375,7 +375,7 @@ watch(
   (cur) => {
     if (!cur) return;
 
-    mapTo.value(cur?.coordinates);
+    mapTo.value?.(cur?.coordinates);
   }
 );
 </script>
