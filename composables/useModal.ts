@@ -73,7 +73,6 @@ export default ({
       console.error(error);
     }
     document.body.style.setProperty("overflow", "auto");
-    //  "overflow:auto";
   });
 
   const isOpen = computed((): boolean => openModalNames.value[name]);

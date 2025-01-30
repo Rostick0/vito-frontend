@@ -42,13 +42,9 @@ onMounted(() => {
     myMap.geoObjects.add(myPlacemark);
   });
 });
-
-// await ymaps.then(res => res.)
 </script>
 
 <style lang="scss" scoped>
 .yandex-map {
-  //   min-height: 400px;
-  //   min-height: 125px;
 }
 </style>

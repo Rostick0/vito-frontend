@@ -32,7 +32,6 @@
 </template>
 
 <script setup>
-// import debounce from "lodash/debounce";
 import { size } from "@vee-validate/rules";
 import uniqueId from "lodash/uniqueId";
 
@@ -57,23 +56,10 @@ const props = defineProps({
   forceDeps: Boolean,
 });
 
-// const dragElem = ref();
-
-// const changeOrder = debounce((dragElemArg, el) => {
-//   const files = [...props.modelValue];
-//   const tmpOrder = files.find((i) => i.id == dragElemArg.id).order;
-//   files.find((i) => i.id == dragElemArg.id).order = el.order;
-//   files.find((i) => i.id == el.id).order = tmpOrder;
-
-//   emits("update:modelValue", files);
-//   dragElem.value = null;
-// });
-
 const handleOnFileChange = (e) => {
   const _files = e.target.files;
 
   if (!_files?.length) {
-    // _files.value = [];
     return emits("update:modelValue", []);
   }
 

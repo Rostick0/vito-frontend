@@ -62,17 +62,6 @@ export function getErrorData(error: any, aborted?: any) {
   }
 }
 
-// type notifyType =
-//   // | string
-//   | {
-//       data?: {
-//         errors?: {
-//           message?: string;
-//         };
-//       };
-//       message?: string
-//     };
-
 export const notify = (error: string) => {
   try {
     // let errorMessage = `${
@@ -111,46 +100,6 @@ export const convertValuesToString = (obj: object) => {
 
   return result;
 };
-
-// type checkSavedResp = {
-//   errors?: any[];
-//   error?: string;
-//   message?: string;
-// };
-
-// export const checkSaved = (
-//   resp: checkSavedResp | checkSavedResp[],
-//   callback?: Function,
-//   message = null,
-//   errorCallback?: Function
-// ) => {
-//   try {
-//     if (
-//       resp?.errors ||
-//       resp?.error ||
-//       (resp?.length && (resp?.[0]?.error || resp?.[0]?.errors))
-//     ) {
-//       if (errorCallback) {
-//         errorCallback(resp);
-//       }
-//       notify(resp);
-//     } else {
-//       success(resp?.message ?? message ?? "Данные успешно сохранены");
-//       typeof callback == "function" ? callback(resp) : null;
-//     }
-//   } catch (error) {
-//     console.error("checkSaved", error);
-//   }
-// };
-
-// function declination(number, titles = [" год", " года", " лет"]) {
-//   const cases = [2, 0, 1, 1, 1, 2];
-//   return titles[
-//     number % 100 > 4 && number % 100 < 20
-//       ? 2
-//       : cases[number % 10 < 5 ? number % 10 : 5]
-//   ];
-// }
 
 export const transliterate = (text: string): string => {
   const cyrillicToLatin = {

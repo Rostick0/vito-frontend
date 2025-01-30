@@ -1,5 +1,4 @@
 <template>
-  <!-- {{ $attrs }} -->
   <input
     class="border-2 border-transparent rounded-lg text-base relative px-3 py-2 w-full focus:border-sky-400"
     :="$attrs"

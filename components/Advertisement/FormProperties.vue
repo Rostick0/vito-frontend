@@ -19,16 +19,6 @@ const propertyUsedIdValues = generateObjFromArr<
   item?.product_property_id,
   true,
 ]);
-// const propertyUsedIdValues = (() => {
-//   const obj = {} as any;
-
-//   props?.avertisementProperties?.forEach(
-//     (item) =>
-//       item?.product_property_id && (obj[item?.product_property_id] = true)
-//   );
-
-//   return obj;
-// })();
 
 const setFormatProperties = () =>
   props.properties?.map((property, index) => {
@@ -40,7 +30,7 @@ const setFormatProperties = () =>
     return {
       type: "select",
       name: `properties_products.${index}`,
-      modelValue: options?.find((item) => propertyUsedIdValues[item?.id]),
+      modelValue: options?.find?.((item) => propertyUsedIdValues?.[item?.id]),
 
       bind: {
         label: property?.name + (property?.unit ? ` (${property?.unit})` : ""),
@@ -50,6 +40,4 @@ const setFormatProperties = () =>
   });
 
 const fields = ref(setFormatProperties());
-
-// watch(props, setFormatProperties);
 </script>

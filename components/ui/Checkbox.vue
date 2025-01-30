@@ -76,7 +76,7 @@ watch(
   display: flex;
   align-items: center;
   transition: 0.3s;
-  // justify-content: ;
+
   &__input {
     transition: 0.3s;
     margin: 0;
@@ -111,14 +111,9 @@ watch(
   }
 
   &__input:focus {
-    /* border-color: $accentColor; */
-    /* outline: 0; */
-    // box-shadow: $accentBoxShadowColor;
   }
 
   &__input:checked {
-    // background-color: $accentColor;
-    // border-color: $accentColor;
   }
 
   &__input:checked[type="checkbox"] {
@@ -130,8 +125,6 @@ watch(
   }
 
   &__input[type="checkbox"]:indeterminate {
-    // background-color: $accentColor;
-    // border-color: $accentColor;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23FFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
   }
 
@@ -139,7 +132,6 @@ watch(
     transition: 0.3s;
     font-size: 0.875rem;
     font-weight: 500;
-    // color: $textColor;
     margin-left: 0.5rem;
   }
 }

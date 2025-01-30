@@ -100,7 +100,6 @@ const handleOnFileChange = (e) => {
   const _files = e.target.files;
 
   if (!_files?.length) {
-    // _files.value = [];
     return emits("update:modelValue", []);
   }
 
