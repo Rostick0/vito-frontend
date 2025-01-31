@@ -5,6 +5,7 @@
       <div class="flex flex-col gap-y-3 mb-6">
         <VFormComponent :field="email" />
         <VFormComponent :field="password" />
+        <VFormComponent :field="repeat_password" />
       </div>
       <UiBtn class="w-full justify-center">Войти</UiBtn>
     </form>
@@ -28,7 +29,9 @@ interface IProps {
 const props = defineProps<IProps>();
 const emits = defineEmits(["activeLoginForm"]);
 
-const { handleSubmit } = useForm();
+const { register } = await useAuth();
+
+const { handleSubmit, setErrors } = useForm();
 
 const email = ref({
   name: "email",
@@ -47,10 +50,28 @@ const password = ref({
   bind: {
     label: "Пароль",
     placeholder: "Введите пароль",
+    type: "password",
   },
 });
 
-const onSubmit = handleSubmit((values) => {
-  console.log(values);
+const repeat_password = ref({
+  name: "repeat_password",
+  type: "text",
+
+  bind: {
+    label: "Подтвердите пароль",
+    placeholder: "Введите пароль ещё раз",
+    type: "password",
+  },
+});
+
+const onSubmit = handleSubmit(async (values) => {
+  const res = await register(values);
+
+  if (res) {
+    setErrors(res);
+  } else {
+    props.registerClose();
+  }
 });
 </script>

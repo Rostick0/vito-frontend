@@ -27,7 +27,6 @@ const props = defineProps({
   rightIcon: String,
   message: String,
   label: String,
-  placeholder: String,
   errorMessage: String,
 });
 </script>
