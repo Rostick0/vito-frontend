@@ -23,9 +23,7 @@ export default async () => {
     try {
       const resp = await auth.login(data);
       // if (resp?.error) resp?.popup();
-      if (resp?.error) {
-        return resp?.errorResponse?.data;
-      }
+      if (resp?.error) return resp?.errorResponse?.data;
 
       setUser(resp);
 
@@ -41,13 +39,11 @@ export default async () => {
     try {
       const resp = await auth.register(data);
       // if (resp?.error) resp?.popup();
-      if (resp?.error) {
-        return resp?.errorResponse?.data;
-      }
+      if (resp?.error) return resp?.errorResponse?.data;
 
       setUser(resp);
       if (isRedirect) {
-        navigateTo(ROUTES_NAMES.profile);
+        // navigateTo(ROUTES_NAMES.profile);
       }
     } catch (error) {
       console.error(error);

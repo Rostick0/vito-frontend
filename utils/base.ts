@@ -21,7 +21,7 @@ export interface IErrorData {
   errorResponse: any;
   popup: () => void;
 }
-export function getErrorData(error: any, aborted?: any) {
+export function getErrorData(error: any, aborted?: any): IErrorData | void {
   try {
     if (aborted) {
       return;
@@ -44,11 +44,10 @@ export function getErrorData(error: any, aborted?: any) {
       }
     }
 
-    const popup = () => {
+    const popup = () =>
       toast.error(errorMessage, {
         timeout: 2000,
       });
-    };
 
     return {
       error: true,

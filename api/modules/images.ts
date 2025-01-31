@@ -1,7 +1,7 @@
 import useFetcher from "../../utils/fetch";
 
 export interface IImageMethods {
-  create: ({ data }: { data: FormData }) => Promise<IImage | IErrorData>;
+  create: ({ data }: { data: FormData }) => Promise<IImage & IErrorData>;
 }
 
 export default <IImageMethods>{

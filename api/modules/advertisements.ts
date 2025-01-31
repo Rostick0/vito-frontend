@@ -12,7 +12,11 @@ export interface IAdvertisementsMethods {
     { params }: { params: any },
     header?: any
   ) => Promise<IAdvertisement[]>;
-  create: ({ data }: { data: IAdvertisementCreate }) => Promise<IAdvertisement>;
+  create: ({
+    data,
+  }: {
+    data: IAdvertisementCreate;
+  }) => Promise<IAdvertisement & IErrorData>;
   update: ({
     id,
     data,
@@ -21,7 +25,7 @@ export interface IAdvertisementsMethods {
     id: string | number;
     data: IAdvertisementCreate;
     params?: Record<string, any>;
-  }) => Promise<IAdvertisement>;
+  }) => Promise<IAdvertisement & IErrorData>;
 }
 
 export default <IAdvertisementsMethods>{

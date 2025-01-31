@@ -30,7 +30,7 @@ export default <IVendorMethods>{
     useFetcher().get(`/vendors`, params, headers),
   getByName: async ({ name, params }) =>
     useFetcher().get(`/vendors/name/${name}`, params),
-  // create: async ({ data }) => useFetcher().post(`/favorites`, data),
+  // create: async ({ data }) => useFetcher().post(`/vendors`, data),
   // delete: async ({ clinic_id, params }) =>
-  // useFetcher().delete(`/favorites/${clinic_id}`, params),
+  // useFetcher().delete(`/vendors/${clinic_id}`, params),
 };

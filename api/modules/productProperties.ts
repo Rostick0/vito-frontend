@@ -24,7 +24,7 @@ export interface IProductPropertyMethods {
 export default <IProductPropertyMethods>{
   getAll: async ({ params }, headers) =>
     useFetcher().get(`/product-properties`, params, headers),
-  // create: async ({ data }) => useFetcher().post(`/favorites`, data),
+  // create: async ({ data }) => useFetcher().post(`/product-properties`, data),
   // delete: async ({ clinic_id, params }) =>
-  // useFetcher().delete(`/favorites/${clinic_id}`, params),
+  // useFetcher().delete(`/product-properties/${clinic_id}`, params),
 };

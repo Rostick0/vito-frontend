@@ -21,7 +21,7 @@ export interface IPropertyMethods {
 export default <IPropertyMethods>{
   getAll: async ({ params = {} } = {}, headers) =>
     useFetcher().get(`/properties`, params, headers),
-  // create: async ({ data }) => useFetcher().post(`/favorites`, data),
+  // create: async ({ data }) => useFetcher().post(`/properties`, data),
   // delete: async ({ clinic_id, params }) =>
-  // useFetcher().delete(`/favorites/${clinic_id}`, params),
+  // useFetcher().delete(`/properties/${clinic_id}`, params),
 };

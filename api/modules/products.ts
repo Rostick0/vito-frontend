@@ -29,7 +29,7 @@ export default <IProductMethods>{
   get: async ({ id, params }) => useFetcher().get(`/products/${id}`, params),
   getAll: async ({ params = {} } = {}, headers) =>
     useFetcher().get(`/products`, params, headers),
-  // create: async ({ data }) => useFetcher().post(`/favorites`, data),
+  // create: async ({ data }) => useFetcher().post(`/products`, data),
   // delete: async ({ clinic_id, params }) =>
-  // useFetcher().delete(`/favorites/${clinic_id}`, params),
+  // useFetcher().delete(`/products/${clinic_id}`, params),
 };
