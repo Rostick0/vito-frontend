@@ -42,12 +42,8 @@ export default function useFetcher() {
       } as NitroFetchOptions<string, "get">;
 
       return await apiFetch(url, opts)
-        .then((res) => {
-          return res;
-        })
-        .catch((error) => {
-          return getErrorData(error, signal?.aborted)?.popup();
-        });
+        .then((res) => res)
+        .catch((error) => getErrorData(error, signal?.aborted)?.popup());
     },
     post: async (
       url: string,
@@ -71,42 +67,24 @@ export default function useFetcher() {
           }
           return res;
         })
-        .catch((error) => {
-          let res = getErrorData(error);
-          // res?.popup();
-          return res;
-        });
+        .catch((error) => getErrorData(error));
     },
     patch: async (url: string, body: bodyType, config = {}) => {
       return await apiFetch(url, { method: "PATCH", body, ...config })
-        .then((res) => {
-          return res;
-        })
-        .catch((error) => {
-          let res = getErrorData(error);
-          // res?.popup();
-          return res;
-        });
+        .then((res) => res)
+        .catch((error) => getErrorData(error));
     },
     put: async (url: string, body: bodyType, config = {}) => {
       return await apiFetch(url, { method: "PUT", body, ...config })
         .then((res) => {
           return res;
         })
-        .catch((error) => {
-          let res = getErrorData(error);
-          // res?.popup();
-          return res;
-        });
+        .catch((error) => getErrorData(error));
     },
     delete: async (url: string, config = {}) => {
       return await apiFetch(url, { method: "DELETE", ...config })
-        .then((res) => {
-          return res;
-        })
-        .catch((error) => {
-          return getErrorData(error);
-        });
+        .then((res) => res)
+        .catch((error) => getErrorData(error));
     },
   };
 }
