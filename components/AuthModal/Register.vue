@@ -22,6 +22,7 @@
 
 <script lang="ts" setup>
 import { useForm } from "vee-validate";
+import type { IRegister } from "~/interfaces/models/User";
 
 interface IProps {
   registerClose: Function;
@@ -31,7 +32,7 @@ const emits = defineEmits(["activeLoginForm"]);
 
 const { register } = await useAuth();
 
-const { handleSubmit, setErrors } = useForm();
+const { handleSubmit, setErrors } = useForm<IRegister>();
 
 const email = ref({
   name: "email",
@@ -65,7 +66,7 @@ const repeat_password = ref({
   },
 });
 
-const onSubmit = handleSubmit(async (values) => {
+const onSubmit = handleSubmit(async (repeat_password, ...values) => {
   const res = await register(values);
 
   if (res) {

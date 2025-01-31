@@ -6,7 +6,7 @@
 import api from "~/api";
 import { useForm } from "vee-validate";
 
-const { handleSubmit } = useForm<IAdvertisementSubmit>();
+const { handleSubmit, setErrors } = useForm<IAdvertisementSubmit>();
 const { getImageIdsFrom } = useImages();
 
 const route = useRoute();
@@ -31,7 +31,12 @@ const onSubmit = handleSubmit(
     } as IAdvertisementCreate;
 
     const res = await api.advertisements.update({ id, data });
-    //   errorMessage.value = resErrors?.message;
+
+    if (res?.error) {
+      setErrors(res?.errorResponse);
+      // errorMessage.value = resErrors?.message;
+      return;
+    }
   }
 );
 

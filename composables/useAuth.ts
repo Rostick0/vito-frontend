@@ -5,8 +5,6 @@ import type { IUser } from "~/interfaces/models/User";
 
 interface IUserserGenerateToken {
   access_token: string;
-  expires_in: number;
-  token_type: "bearer";
   user: IUser;
 }
 
@@ -47,7 +45,7 @@ export default async () => {
         return resp?.errorResponse?.data;
       }
 
-      setUser(resp?.data);
+      setUser(resp);
       if (isRedirect) {
         navigateTo(ROUTES_NAMES.profile);
       }
@@ -68,8 +66,8 @@ export default async () => {
           { Authorization: `Bearer ${accessToken.value}` }
         )
         .then((resp) => {
-          if (!resp?.error && resp?.data) {
-            user.value = resp?.data;
+          if (!resp?.error && resp) {
+            user.value = resp;
           }
         });
     } catch (error) {
@@ -90,10 +88,6 @@ export default async () => {
       navigateTo(ROUTES_NAMES.login);
     }
   };
-
-  // if (accessToken.value && !user.value) {
-  //   await getUser();
-  // }
 
   return {
     accessToken,

@@ -21,6 +21,7 @@
 
 <script lang="ts" setup>
 import { useForm } from "vee-validate";
+import type { ILogin } from "~/interfaces/models/User";
 
 interface IProps {
   loginClose: Function;
@@ -30,7 +31,7 @@ const emits = defineEmits(["activeRegisterForm"]);
 
 const { login } = await useAuth();
 
-const { handleSubmit, setErrors } = useForm();
+const { handleSubmit, setErrors } = useForm<ILogin>();
 
 const email = ref({
   name: "email",
@@ -53,7 +54,6 @@ const password = ref({
 });
 
 const onSubmit = handleSubmit(async (values) => {
-  // console.log(values);
   const res = await login(values);
 
   if (res) {
@@ -62,6 +62,4 @@ const onSubmit = handleSubmit(async (values) => {
     props.loginClose?.();
   }
 });
-
-console.log(5);
 </script>

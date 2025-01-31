@@ -6,7 +6,7 @@
 import api from "~/api";
 import { useForm } from "vee-validate";
 
-const { handleSubmit } = useForm<IAdvertisementSubmit>();
+const { handleSubmit, setErrors } = useForm<IAdvertisementSubmit>();
 const { getImageIdsFrom } = useImages();
 
 const onSubmit = handleSubmit(
@@ -18,20 +18,24 @@ const onSubmit = handleSubmit(
     vendor,
     ...values
   }) => {
-    console.log(values);
-    // const images_load = await getImageIdsFrom(images);
+    const images_load = await getImageIdsFrom(images);
 
-    // const data = {
-    //   ...values,
-    //   images: images_load,
-    //   product_id: product?.id,
-    //   properties_products: properties_products?.map((item) => item?.id),
-    //   office_id: office?.id,
-    // } as IAdvertisementCreate;
+    const data = {
+      ...values,
+      images: images_load,
+      product_id: product?.id,
+      properties_products: properties_products?.map((item) => item?.id),
+      office_id: office?.id,
+    } as IAdvertisementCreate;
 
-    // // console.log(data);
-    // const res = await api.advertisements.create({ data });
-    //   errorMessage.value = resErrors?.message;
+    // console.log(data);
+    const res = await api.advertisements.create({ data });
+
+    if (res?.error) {
+      setErrors(res?.errorResponse);
+      // errorMessage.value = resErrors?.message;
+      return;
+    }
   }
 );
 
