@@ -1,6 +1,8 @@
 export interface IUser {
   id: number;
   name: string;
+  email: string;
+  tel: string;
   raiting: number;
   reviews_count?: number;
   type: keyof typeof USER_TYPE;

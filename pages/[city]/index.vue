@@ -3,7 +3,7 @@
     <div class="flex items-start gap-5">
       <Filter v-if="properties" :properties="properties" />
 
-      <CardAdvertisementList
+      <CardAdvertisementRowList
         class="grow"
         v-if="newAdvertisements?.length"
         :advertisements="newAdvertisements"
@@ -38,7 +38,7 @@ const { data: newAdvertisements, get: getNewAdvertisements } = await useApi<
   apiMethod: "getAll",
   apiName: "advertisements",
   params: {
-    expand: "mainImage",
+    expand: ["mainImage", "user"].join(","),
     sort: "-id",
     // limit:
   },

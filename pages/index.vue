@@ -3,7 +3,7 @@
     <VendorList v-if="vendors?.length" class="mb-8" :vendors="vendors" />
     <div v-if="newAdvertisements?.length" class="">
       <UiH2>Новинки</UiH2>
-      <CardAdvertisementList :advertisements="newAdvertisements" />
+      <CardAdvertisementColList :advertisements="newAdvertisements" />
     </div>
   </div>
 </template>

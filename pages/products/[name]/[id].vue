@@ -19,7 +19,7 @@
     </div>
     <div v-if="advertisements?.length" class="mt-8">
       <UiH2>Предложения продавцов</UiH2>
-      <CardAdvertisementList :advertisements="advertisements" />
+      <CardAdvertisementColList :advertisements="advertisements" />
     </div>
   </div>
 </template>
