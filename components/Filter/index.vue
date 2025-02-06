@@ -1,5 +1,5 @@
 <template>
-  <form @submit="onSubmit" class="">
+  <form class="bg-white rounded-xl p-4">
     <div class="flex flex-col gap-y-3">
       <VFormComponent
         v-for="property in properties"
@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 interface IProps {
   properties?: IProperty[];
-  onSubmit: (payload: Event) => void;
+  // onSubmit: (payload: Event) => void;
 }
 
 const props = defineProps<IProps>();
