@@ -35,6 +35,7 @@
         </div>
       </template>
     </div>
+    {{ options }}
     <div
       ref="selectRef"
       v-if="isOpened"

@@ -22,10 +22,7 @@ const propertyUsedIdValues = generateObjFromArr<
 
 const setFormatProperties = () =>
   props.properties?.map((property, index) => {
-    const options = property?.productProperties?.map((item) => ({
-      ...item,
-      value: item?.value ?? item?.propertyValue?.value,
-    }));
+    const options = getPropertyOptions(property);
 
     return {
       type: "select",
@@ -33,7 +30,7 @@ const setFormatProperties = () =>
       modelValue: options?.find?.((item) => propertyUsedIdValues?.[item?.id]),
 
       bind: {
-        label: property?.name + (property?.unit ? ` (${property?.unit})` : ""),
+        label: getPropertyLabel(property),
         options,
       },
     };

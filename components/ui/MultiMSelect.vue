@@ -10,39 +10,26 @@
   />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import debounce from "lodash/debounce";
 
-const props = defineProps({
-  limit: {
-    type: Number,
-    default: 20,
-  },
-  options: {
-    type: [Array],
-    default: [],
-  },
-  modelValue: {
-    type: Array,
-  },
-  searchFn: {
-    type: Function,
-  },
-  onChange: {
-    type: Function,
-  },
-  deps: [Array, Object, String, Number],
-  onDepsChange: {
-    type: Function,
-  },
-  debounceMs: {
-    type: [Number, String],
-    default: 600,
-  },
-  forceDeps: Boolean,
-  message: String,
-  errorMessage: String,
-  isAlternative: Boolean,
+interface IProps {
+  limit?: number;
+  options?: Array<any>;
+  modelValue: Array<any>;
+  searchFn?: Function;
+  onChange?: Function;
+  deps?: [] | object | string | number;
+  onDepsChange?: Function;
+  debounceMs?: string | number;
+  forceDeps?: boolean;
+  message?: string;
+  errorMessage?: string;
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  limit: 20,
+  debounceMs: 600,
 });
 
 const emits = defineEmits(["update:modelValue"]);
@@ -65,10 +52,10 @@ const searchString = ref("");
 
 const debounceHandleScrollToBottom = debounce(
   handleScrollToBottom,
-  props.debounceMs
+  +props.debounceMs
 );
 
-const debounceHandleSearch = debounce(handleSearch, props.debounceMs);
+const debounceHandleSearch = debounce(handleSearch, +props.debounceMs);
 
 // Контекст данного селекта, может понадобится для кастомизации специфичных моментов
 const ctx = computed(() => ({
@@ -125,7 +112,7 @@ watch(
 );
 
 // Записывает новый массив на основе поисковой строки и лимита, вызывается при вводе символов
-async function handleSearch(_searchString) {
+async function handleSearch(_searchString: string) {
   if (!props.searchFn) return;
 
   currentSearchLimit.value = props.limit;

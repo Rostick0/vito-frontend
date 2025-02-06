@@ -5,13 +5,13 @@
     v-bind="field.bind"
     :errorMessage="errorMessage"
   />
-  <ClientOnly v-else-if="field.type == 'select'">
+  <template v-else-if="field.type == 'select'">
     <VFormMultiSelect
       v-model="model"
       v-bind="field.bind"
       :error-message="errorMessage"
     />
-  </ClientOnly>
+  </template>
   <VFormTextarea
     v-else-if="field.type == 'textarea'"
     v-model="model"

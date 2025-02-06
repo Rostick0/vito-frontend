@@ -15,7 +15,13 @@
 
 <script setup>
 const emits = defineEmits(["update:modelValue"]);
+
 const props = defineProps({
+  label: String,
+  hideMessage: String,
+  message: String,
+  errorMessage: String,
+  rightIcon: String,
   limit: {
     type: Number,
     default: 20,
