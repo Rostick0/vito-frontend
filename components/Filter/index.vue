@@ -26,7 +26,7 @@ const props = defineProps<IProps>();
 
 const vendor = ref({
   type: "multiple-select",
-  name: `filter[venodr_id][in]`,
+  name: "filter.in.product:vendor_id",
   modelValue: [],
 
   bind: {
@@ -38,7 +38,8 @@ const vendor = ref({
 
 const product = ref({
   type: "multiple-select",
-  name: `filter[product_id][in]`,
+  name: "filter.in.product_id",
+  // name: `filter[product_id][in]`,
   modelValue: [],
 
   bind: {
@@ -85,7 +86,7 @@ async function fetchProduct(
   return await api.products.getAll({
     params: {
       "filter[name][like]": searchString,
-      "filter[vendor_id]": vendor.value.modelValue?.id,
+      // "filter[vendor_id]": vendor.value.modelValue?.id,
       limit,
       page,
     },

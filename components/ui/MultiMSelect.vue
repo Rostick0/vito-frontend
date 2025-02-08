@@ -15,7 +15,7 @@ import debounce from "lodash/debounce";
 
 interface IProps {
   limit?: number;
-  options?: Array<any>;
+  options?: Array<IOption>;
   modelValue: Array<any>;
   searchFn?: Function;
   onChange?: Function;
@@ -55,7 +55,6 @@ const debounceHandleScrollToBottom = debounce(
   +props.debounceMs
 );
 
-console.log(props.debounceMs)
 const debounceHandleSearch = debounce(handleSearch, +props.debounceMs);
 
 // Контекст данного селекта, может понадобится для кастомизации специфичных моментов
@@ -65,10 +64,10 @@ const ctx = computed(() => ({
   handleSearch: handleSearch,
   debounceHandleSearch: debounceHandleSearch,
   initialOptions: props.options,
-  updateCurrentOptions: (values) => (currentOptions.value = values),
+  updateCurrentOptions: (values: IOption[]) => (currentOptions.value = values),
   currentOptions: currentOptions.value,
   modelValue: props.modelValue,
-  updateModelValue: (value) => emits("update:modelValue", value),
+  updateModelValue: (value: any[]) => emits("update:modelValue", value),
 }));
 
 // При изменении поисковой строки вызывает handleSearch с задержкой

@@ -1,5 +1,6 @@
 <template>
   <div class="container mx-auto">
+    {{ filters }}
     <div class="flex items-start gap-5">
       <Filter v-if="properties" :properties="properties" />
 
@@ -63,21 +64,34 @@ watch(
   debounce((cur) => {
     if (!initWatch.value) return (initWatch.value = true);
 
-    const filtersProperties = [] as Array<number | never>;
-    // filter[advertisementProperties.product_property_id][in]
+    const allFilters = {} as Record<string, string | Array<string | number>>;
 
-    console.log(values);
-    if (cur?.properties_products) {
+    if (cur?.filter?.in) {
+      Object.keys(cur?.filter?.in).forEach((item) => {
+        if (!cur.filter.in[item]) return;
+
+        allFilters[`filter[${item?.replace(/:/g, ".")}][in]`] = JSON.stringify(
+          cur.filter.in[item]?.map((item: IOption) => item?.id)
+        );
+      });
+    }
+
+    if (cur?.properties_products?.length) {
+      const proeprtyValues = [] as Array<number | never>;
+
       cur?.properties_products?.forEach(
         (productProperties: IProductProperty[]) =>
           productProperties?.forEach(
-            (item) => item?.id && filtersProperties.push(item?.id)
+            (item) => item?.id && proeprtyValues.push(item?.id)
           )
       );
 
-      filters.value["filter[advertisementProperties.product_property_id][in]"] =
-        filtersProperties;
+      if (proeprtyValues?.length)
+        allFilters["filter[advertisementProperties.product_property_id][in]"] =
+          JSON.stringify(proeprtyValues);
     }
+
+    filters.value = allFilters;
   }, 750)
 );
 </script>

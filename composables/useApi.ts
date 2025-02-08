@@ -65,7 +65,7 @@ export default async <T>({
           ...filter,
           // signal: signal.value,
         },
-      } as { headers?: any; params: any };
+      } as { headers?: any; params: Record<string, any> };
       if (headers) {
         preParams.headers = headers;
       }
@@ -77,7 +77,6 @@ export default async <T>({
 
         if (cacheValue) {
           data.value = cacheValue.data;
-          // meta.value = cacheValue.meta;
           return;
         }
       }

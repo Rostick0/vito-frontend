@@ -11,7 +11,7 @@ interface IInitialParams {
 }
 
 interface IGetParams extends NitroFetchOptions<string, "get"> {
-  signal?: AbortSignal | null | undefined;
+  signal?: AbortSignal | null;
 }
 
 export default function useFetcher() {
@@ -62,9 +62,8 @@ export default function useFetcher() {
 
       return await apiFetch(url, { method: "POST", body, ...conf })
         .then(async (res) => {
-          if (res instanceof Blob) {
-            return JSON.parse(await res.text());
-          }
+          if (res instanceof Blob) return JSON.parse(await res.text());
+
           return res;
         })
         .catch((error) => getErrorData(error));
@@ -76,9 +75,7 @@ export default function useFetcher() {
     },
     put: async (url: string, body: bodyType, config = {}) => {
       return await apiFetch(url, { method: "PUT", body, ...config })
-        .then((res) => {
-          return res;
-        })
+        .then((res) => res)
         .catch((error) => getErrorData(error));
     },
     delete: async (url: string, config = {}) => {
