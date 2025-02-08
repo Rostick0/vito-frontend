@@ -65,15 +65,19 @@ watch(
 
     const filtersProperties = [] as Array<number | never>;
     // filter[advertisementProperties.product_property_id][in]
-    // console.log(cur?.properties_products);
-    cur?.properties_products?.forEach((productProperties: IProductProperty[]) =>
-      productProperties?.forEach(
-        (item) => item?.id && filtersProperties.push(item?.id)
-      )
-    );
 
-    filters.value["filter[advertisementProperties.product_property_id][in]"] =
-      filtersProperties;
+    console.log(values);
+    if (cur?.properties_products) {
+      cur?.properties_products?.forEach(
+        (productProperties: IProductProperty[]) =>
+          productProperties?.forEach(
+            (item) => item?.id && filtersProperties.push(item?.id)
+          )
+      );
+
+      filters.value["filter[advertisementProperties.product_property_id][in]"] =
+        filtersProperties;
+    }
   }, 750)
 );
 </script>

@@ -43,10 +43,6 @@ const props = defineProps({
   onDepsChange: {
     type: Function,
   },
-  debounceMs: {
-    type: [Number, String],
-    default: 0,
-  },
   forceDeps: Boolean,
 });
 </script>

@@ -9,7 +9,7 @@
         <input
           class="select__value"
           v-show="!isOpened"
-          :placeholder="placeholder || 'No selected'"
+          :placeholder="placeholder || 'Не выбрано'"
           :value="selectedItemsText"
           readonly
         />

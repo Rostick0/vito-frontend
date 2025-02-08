@@ -55,6 +55,7 @@ const debounceHandleScrollToBottom = debounce(
   +props.debounceMs
 );
 
+console.log(props.debounceMs)
 const debounceHandleSearch = debounce(handleSearch, +props.debounceMs);
 
 // Контекст данного селекта, может понадобится для кастомизации специфичных моментов
@@ -71,15 +72,9 @@ const ctx = computed(() => ({
 }));
 
 // При изменении поисковой строки вызывает handleSearch с задержкой
-watch(
-  searchString,
-  async () => {
-    await debounceHandleSearch(searchString.value);
-  },
-  {
-    immediate: true,
-  }
-);
+watch(searchString, debounceHandleSearch.bind(searchString.value), {
+  immediate: true,
+});
 
 // Срабатывает при изменении зависимостей в массиве deps
 watch(
@@ -115,7 +110,7 @@ watch(
 async function handleSearch(_searchString: string) {
   if (!props.searchFn) return;
 
-  currentSearchLimit.value = props.limit;
+  // currentSearchLimit.value = props.limit;
 
   const options = await props.searchFn(
     ctx.value,
@@ -126,7 +121,7 @@ async function handleSearch(_searchString: string) {
 
   page.value = 1;
   totalPages.value = options?.last_page;
-  if (options?.data?.length) currentOptions.value = [...options.data];
+  if (options?.length) currentOptions.value = options;
 }
 
 // Записывает новый массив после скролла и двигает лимит вперёд, вызывается при скролле
@@ -143,7 +138,7 @@ async function handleScrollToBottom() {
   );
 
   totalPages.value = newPages?.last_page;
-  if (newPages?.data?.length)
-    currentOptions.value = [...currentOptions.value, ...newPages.data];
+  if (newPages?.length)
+    currentOptions.value = [...currentOptions.value, ...newPages];
 }
 </script>

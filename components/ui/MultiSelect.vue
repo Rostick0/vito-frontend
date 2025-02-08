@@ -37,7 +37,7 @@ const props = defineProps({
   },
   debounceMs: {
     type: [Number, String],
-    default: 400,
+    default: 600,
   },
   forceDeps: Boolean,
 });

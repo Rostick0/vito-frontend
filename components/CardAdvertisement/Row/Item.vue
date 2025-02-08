@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white flex gap-x-4 rounded-xl p-5">
-    <NuxtLink class="w-full max-w-60" :to="link">
+    <NuxtLink class="shrink-0 w-full max-w-60" :to="link">
       <div class="relative flex pt-[100%] w-full">
         <img
           class="absolute top-0 object-cover w-full h-full"
