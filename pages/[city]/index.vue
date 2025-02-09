@@ -1,6 +1,5 @@
 <template>
   <div class="container mx-auto">
-    {{ filters }}
     <div class="flex items-start gap-5">
       <Filter v-if="properties" :properties="properties" />
 
@@ -9,6 +8,7 @@
         v-if="newAdvertisements?.length"
         :advertisements="newAdvertisements"
       />
+      <UiNotFound v-else />
     </div>
   </div>
 </template>
@@ -68,7 +68,7 @@ watch(
 
     if (cur?.filter?.in) {
       Object.keys(cur?.filter?.in).forEach((item) => {
-        if (!cur.filter.in[item]) return;
+        if (!cur.filter.in[item]?.length) return;
 
         allFilters[`filter[${item?.replace(/:/g, ".")}][in]`] = JSON.stringify(
           cur.filter.in[item]?.map((item: IOption) => item?.id)

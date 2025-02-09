@@ -10,7 +10,6 @@
         :field="property"
       />
     </div>
-    <!-- {{ properties }} -->
   </form>
 </template>
 
