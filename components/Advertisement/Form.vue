@@ -1,6 +1,5 @@
 <template>
   <div class="container mx-auto">
-    <!-- {{ advertisement?.images?.map((item) => item?.image) }} -->
     <form class="max-w-xl" @submit="onSubmit" method="post">
       <div class="flex flex-col gap-y-8 mb-8">
         <div class="">
@@ -25,7 +24,16 @@
             <AdvertisementFormProperties
               v-if="properties?.length"
               :properties="properties"
-              :avertisementProperties="advertisement?.advertisementProperties"
+              :advertisementProperties="advertisement?.advertisementProperties"
+            />
+          </div>
+        </div>
+        <div class="" v-if="defectTypes?.length">
+          <h2 class="font-bold text-2xl mb-4">Неисправности</h2>
+          <div class="flex flex-col gap-y-3">
+            <AdvertisementFormDefects
+              :defectTypes="defectTypes"
+              :advertisementDefects="advertisement?.advertisementDefects"
             />
           </div>
         </div>
@@ -72,6 +80,7 @@
 import api from "~/api";
 
 interface IProps {
+  categoryId: number;
   advertisement?: IAdvertisement;
   onSubmit: (payload: Event) => void;
 }
@@ -208,6 +217,15 @@ const { data: properties, get: getProperties } = await useApi<IProperty[]>({
   // filters
 });
 
+const { data: defectTypes } = await useApi<IDefectType[]>({
+  apiName: "defectTypes",
+  apiMethod: "getAll",
+  params: {
+    expand: "defects",
+  },
+  init: true,
+});
+
 watch(
   () => vendor.value.modelValue,
   (cur) => {
@@ -235,12 +253,6 @@ watch(
         "filter[productProperties.product_id]": cur?.id,
       }
     );
-    // api.properties.getAll({
-    //   params: {
-    //     "filter[productProperties.product_id]": cur?.id,
-    //     "filter[is_specified]": 1,
-    //   },
-    // });
   }
 );
 

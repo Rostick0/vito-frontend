@@ -1,4 +1,6 @@
 import advertisements from "./modules/advertisements";
+import defects from "./modules/defects";
+import defectTypes from "./modules/defectTypes";
 import cities from "./modules/cities";
 import emailCode from "./modules/emailCode";
 import images from "./modules/images";
@@ -10,6 +12,8 @@ import vendors from "./modules/vendors";
 
 const api = {
   advertisements,
+  defectTypes,
+  defects,
   cities,
   emailCode,
   images,

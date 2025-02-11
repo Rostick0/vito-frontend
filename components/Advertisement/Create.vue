@@ -1,9 +1,5 @@
 <template>
-  <AdvertisementForm
-    :advertisement="advertisement"
-    :categoryId="categoryId"
-    :onSubmit="onSubmit"
-  />
+  <AdvertisementForm :categoryId="categoryId" :onSubmit="onSubmit" />
 </template>
 
 <script lang="ts" setup>
@@ -11,13 +7,14 @@ import flattenDepth from "lodash/flattenDepth";
 import api from "~/api";
 import { useForm } from "vee-validate";
 
-const categoryId = ref(1);
+interface IProps {
+  categoryId: number;
+}
+
+const props = defineProps<IProps>();
 
 const { handleSubmit, setErrors } = useForm<IAdvertisementSubmit>();
 const { getImageIdsFrom } = useImages();
-
-const route = useRoute();
-const id = route.params?.id?.toString();
 
 const onSubmit = handleSubmit(
   async ({
@@ -44,7 +41,8 @@ const onSubmit = handleSubmit(
       office_id: office?.id,
     } as IAdvertisementCreate;
 
-    const res = await api.advertisements.update({ id, data });
+    // console.log(data);
+    const res = await api.advertisements.create({ data });
 
     if (res?.error) {
       setErrors(res?.errorResponse);
@@ -53,25 +51,4 @@ const onSubmit = handleSubmit(
     }
   }
 );
-
-const advertisement = await api.advertisements.get({
-  id,
-  params: {
-    expand: [
-      "product.vendor",
-      "images.image",
-      "advertisementProperties.property",
-      "advertisementDefects.defect",
-    ].join(),
-  },
-});
-
-useHead({
-  title: `Редактирование объявления #${id}`,
-});
-
-// definePageMeta({
-//   layout: "auth",
-//   middleware: ["no-auth"],
-// });
 </script>

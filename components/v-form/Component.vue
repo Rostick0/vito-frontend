@@ -39,6 +39,13 @@
     :error-message="errorMessage"
   />
 
+  <VFormTagCheckbox
+    v-else-if="field.type == 'tag'"
+    v-model="model"
+    v-bind="field.bind"
+    :error-message="errorMessage"
+  />
+
   <VFormDatePicker
     v-else-if="field.type == 'date'"
     v-model="model"

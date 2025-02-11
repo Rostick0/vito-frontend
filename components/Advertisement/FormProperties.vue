@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 interface IProps {
   properties?: IProperty[];
-  avertisementProperties?: IAdvertisementProperty[];
+  advertisementProperties?: IAdvertisementProperty[];
 }
 
 const props = defineProps<IProps>();
@@ -15,7 +15,7 @@ const propertyUsedIdValues = generateObjFromArr<
     [_: number]: boolean;
   },
   IAdvertisementProperty
->(props?.avertisementProperties ?? [], (item) => [
+>(props?.advertisementProperties ?? [], (item) => [
   item?.product_property_id,
   true,
 ]);
@@ -26,7 +26,7 @@ const setFormatProperties = () =>
 
     return {
       type: "select",
-      name: `properties_products.${index}`,
+      name: `advertisement_properties.${index}`,
       modelValue: options?.find?.((item) => propertyUsedIdValues?.[item?.id]),
 
       bind: {

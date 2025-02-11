@@ -51,7 +51,7 @@ const product = ref({
 const properties = ref(
   props.properties?.map((property, index) => ({
     type: "multiple-select",
-    name: `properties_products.${index}`,
+    name: `advertisement_properties.${index}`,
     modelValue: [],
 
     bind: {

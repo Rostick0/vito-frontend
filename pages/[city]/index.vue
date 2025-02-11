@@ -20,14 +20,10 @@ import { useForm } from "vee-validate";
 const { values, handleSubmit } = useForm();
 
 const { filters } = useFilters<{
-  "filter[advertisementProperties.product_property_id][in]": Array<
-    number | never
-  >;
-}>({
-  initialFilters: {
-    "filter[advertisementProperties.product_property_id][in]": [],
-  },
-});
+  "filter[product.vendor_id][in]"?: Array<number>;
+  "filter[product_id][in]"?: Array<number>;
+  "filter[advertisementProperties.product_property_id][in]"?: Array<number>;
+}>();
 
 // const onSubmit = handleSubmit(async (values) => {
 //   console.log(values);
@@ -53,7 +49,7 @@ const { data: properties, get: getProperties } = await useApi<IProperty[]>({
     expand: "productProperties.propertyValue",
     "filter[is_specified]": 1,
   },
-  // filters
+  // filters 
 });
 
 await Promise.all([getNewAdvertisements(), getProperties()]);
@@ -76,10 +72,10 @@ watch(
       });
     }
 
-    if (cur?.properties_products?.length) {
+    if (cur?.advertisement_properties?.length) {
       const proeprtyValues = [] as Array<number | never>;
 
-      cur?.properties_products?.forEach(
+      cur?.advertisement_properties?.forEach(
         (productProperties: IProductProperty[]) =>
           productProperties?.forEach(
             (item) => item?.id && proeprtyValues.push(item?.id)

@@ -178,3 +178,26 @@ export const groupByInArray = (array: [], name: string) => {
     value: group[el],
   }));
 };
+
+export const generateObjFromArr = <T, K>(
+  arr: K[],
+  callback: (value: K, index: number, array: K[]) => [keyof T, T[keyof T]]
+) => {
+  const obj = {} as T;
+
+  arr?.forEach(function (...args) {
+    const [key, value] = callback(...args);
+
+    obj[key] = value;
+  });
+
+  return obj;
+};
+
+export const toArrayObject = (
+  obj: Record<string, any>,
+  callback = (key: string, index: number, array: string[]): object => ({
+    name: key,
+    value: obj[key],
+  })
+) => Object.keys(obj).map(callback);

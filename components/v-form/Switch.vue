@@ -22,9 +22,6 @@ interface Props {
   message?: string;
   label?: string;
   title?: string;
-  maska?: any;
-  dataMaskReserved?: boolean;
-  maskaTokens?: any;
   errorMessage?: string;
   placeholder?: string;
 }

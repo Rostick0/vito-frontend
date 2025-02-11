@@ -14,6 +14,7 @@ export interface IAdvertisement {
   product?: IProduct;
   user?: IUser;
   advertisementProperties?: IAdvertisementProperty[];
+  advertisementDefects?: IAdvertisementDefect[];
   office?: IOffice;
 }
 
@@ -27,7 +28,8 @@ export interface IAdvertisementSubmit {
   office: IOffice;
   product: IProduct;
   vendor: IVendor;
-  properties_products: IProductProperty[];
+  advertisement_properties: IProductProperty[];
+  advertisement_defects?: IAdvertisementDefect[];
 }
 
 export interface IAdvertisementCreate {
@@ -39,5 +41,6 @@ export interface IAdvertisementCreate {
   product_id: number;
   office_id: number;
   images?: string;
-  properties_products: number[];
+  advertisement_properties: number[];
+  advertisement_defects?: number[];
 }
