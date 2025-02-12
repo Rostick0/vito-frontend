@@ -1,6 +1,6 @@
 <template>
   <!-- <NuxtLayout name="default" :headerIsSticky="false"> -->
-  <div class="container mx-auto">
+  <div class="container mx-auto" v-if="advertisement">
     <UiH1>{{ advertisement?.title }}</UiH1>
     <div class="flex gap-x-12 items-start">
       <div class="grow">
@@ -14,7 +14,7 @@
           :advertisement="advertisement"
         />
         <div class="flex flex-col gap-y-10 max-md:gap-y-5 mt-16">
-          <AdvertisementParams title="О смартфоне">
+          <!-- <AdvertisementParams title="О смартфоне">
             <div class="grid gap-2 md:grid-cols-2">
               <AdvertisementParamsItem title="Экран"
                 >Без дефектов</AdvertisementParamsItem
@@ -26,12 +26,12 @@
                 >Коробка, Блок зарядки, Провод зарядки</AdvertisementParamsItem
               >
             </div>
-          </AdvertisementParams>
+          </AdvertisementParams> -->
           <AdvertisementParams title="Характеристики">
             <div class="grid gap-2 sm:grid-cols-2">
-              <!-- <AdvertisementParamsItem title="Состояние"
-                >Хорошее</AdvertisementParamsItem
-              > -->
+              <AdvertisementParamsItem title="Состояние">{{
+                advertisement?.is_new ? "Новое" : "Б/у"
+              }}</AdvertisementParamsItem>
               <AdvertisementParamsItem title="Производитель">{{
                 advertisement?.product?.vendor?.name
               }}</AdvertisementParamsItem>
@@ -67,6 +67,17 @@
             </div>
           </AdvertisementParams>
           <AdvertisementParams
+            v-if="advertisement?.advertisementDefects?.length"
+            title="Неисправности"
+          >
+            <div
+              v-for="advertisementDefects in advertisement?.advertisementDefects"
+              :key="advertisementDefects.id"
+            >
+              {{ advertisementDefects?.defect?.name }}
+            </div>
+          </AdvertisementParams>
+          <AdvertisementParams
             v-if="advertisement?.description"
             title="Описание"
             >{{ advertisement.description }}</AdvertisementParams
@@ -95,22 +106,30 @@
 </template>
 
 <script lang="ts" setup>
-import api from "~/api";
+// import api from "~/api";
 
 const route = useRoute();
-const advertisement = await api.advertisements.get({
-  id: route.params?.id?.toString(),
-  params: {
-    expand: [
-      "images.image",
-      "advertisementProperties.productProperty.property",
-      "advertisementProperties.productProperty.propertyValue",
-      "product.vendor",
-    ].join(","),
-  },
-});
+const { data: advertisement, get: getAdvertisement } =
+  await useApi<IAdvertisement>({
+    apiMethod: "get",
+    apiName: "advertisements",
+    requestParams: {
+      id: route.params?.id?.toString(),
+    },
+    params: {
+      expand: [
+        "advertisementProperties.productProperty.property",
+        "advertisementProperties.productProperty.propertyValue",
+        "advertisementDefects.defect",
+        "images.image",
+        "product.vendor",
+      ].join(","),
+    },
+  });
 
-if (!advertisement) navigateTo("/404", {});
+await Promise.all([getAdvertisement()]);
+
+if (!advertisement.value) navigateTo("/404", {});
 
 // definePageMeta({
 //   //   name: "empty",

@@ -25,12 +25,14 @@
 </template>
 
 <script lang="ts" setup>
-import api from "~/api";
-
 const route = useRoute();
 
-const product = await api.products.get({
-  id: route.params?.id?.toString(),
+const { data: product, get: getProduct } = await useApi<IProduct>({
+  apiName: "products",
+  apiMethod: "get",
+  requestParams: {
+    id: route.params?.id?.toString(),
+  },
   params: {
     expand: [
       "images.image",
@@ -41,11 +43,6 @@ const product = await api.products.get({
   },
 });
 
-const groupBy = groupByInArray(
-  product?.productProperties,
-  "property.propertyType.name"
-);
-
 const { data: advertisements, get: getAdvertisements } = await useApi<
   IAdvertisement[]
 >({
@@ -53,8 +50,15 @@ const { data: advertisements, get: getAdvertisements } = await useApi<
   apiMethod: "getAll",
   params: {
     expand: "mainImage",
-    "filter[product_id]": product?.id,
+    "filter[product_id]": route.params?.id?.toString(),
   },
 });
-await getAdvertisements();
+await Promise.all([getAdvertisements(), getProduct()]);
+
+if (!product.value) navigateTo("/404", {});
+
+const groupBy = groupByInArray(
+  product.value?.productProperties ?? [],
+  "property.propertyType.name"
+);
 </script>

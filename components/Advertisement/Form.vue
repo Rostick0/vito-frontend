@@ -28,7 +28,7 @@
             />
           </div>
         </div>
-        <div class="" v-if="defectTypes?.length">
+        <div class="" v-if="!is_new.modelValue && defectTypes?.length">
           <h2 class="font-bold text-2xl mb-4">Неисправности</h2>
           <div class="flex flex-col gap-y-3">
             <AdvertisementFormDefects
