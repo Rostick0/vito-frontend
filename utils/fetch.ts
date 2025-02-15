@@ -22,6 +22,7 @@ export default function useFetcher() {
   const initialParams = {
     baseURL: baseUrl,
     headers: {},
+    refetch: 1000000,
   } as IInitialParams;
 
   if (token && token !== "") {

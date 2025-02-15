@@ -41,7 +41,6 @@ const onSubmit = handleSubmit(
       office_id: office?.id,
     } as IAdvertisementCreate;
 
-    // console.log(data);
     const res = await api.advertisements.create({ data });
 
     if (res?.error) {

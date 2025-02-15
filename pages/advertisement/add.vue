@@ -1,9 +1,26 @@
 <template>
-  <AdvertisementCreate :categoryId="categoryId" />
+  <AdvertisementCategories
+    v-if="!categoryId"
+    :categories="categories"
+    @setCategory="(val) => (categoryId = val)"
+  />
+  <AdvertisementCreate v-else :categoryId="categoryId" />
 </template>
 
 <script lang="ts" setup>
-const categoryId = ref(1);
+const { data: categories, get: getCategories } = await useApi<ICategory[]>({
+  apiName: "categories",
+  apiMethod: "getAll",
+  params: {
+    expand: "categoriesCount",
+    "filter[category_id]": "NULL",
+  },
+});
+
+await getCategories();
+
+const categoryId = ref(null);
+// const categoryId = ref(1);
 
 useHead({
   title: "Добавление объявления",

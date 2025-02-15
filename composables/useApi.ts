@@ -70,38 +70,40 @@ export default async <T>({
         preParams.headers = headers;
       }
 
-      if (withCache) {
-        const cacheValue = cache.value.find(
-          (item) => item.params === JSON.stringify(preParams)
-        );
+      // if (withCache) {
+      //   const cacheValue = cache.value.find(
+      //     (item) => item.params === JSON.stringify(preParams)
+      //   );
 
-        if (cacheValue) {
-          data.value = cacheValue.data;
-          return;
-        }
-      }
+      //   if (cacheValue) {
+      //     data.value = cacheValue.data;
+      //     return;
+      //   }
+      // }
 
       if (isLoading.value === false) return;
       isLoading.value = false;
 
       await api?.[apiName]?.[apiMethod]?.(preParams, headers)?.then(
         async (res: any) => {
-          const { data: dataLocal, ...other } = res;
+          // const { data: dataLocal, ...other } = res;
           // const dataLocal = res;
 
-          data.value = dataLocal ?? res;
-          meta.value = other;
+          console.log(res);
+          data.value = res;
+          // data.value = dataLocal ?? res;
+          // meta.value = other;
 
-          if (withCache) {
-            cache.value = [
-              ...cache.value,
-              {
-                params: JSON.stringify(preParams),
-                data: dataLocal,
-                // meta: other,
-              },
-            ];
-          }
+          // if (withCache) {
+          //   cache.value = [
+          //     ...cache.value,
+          //     {
+          //       params: JSON.stringify(preParams),
+          //       data: dataLocal,
+          //       // meta: other,
+          //     },
+          //   ];
+          // }
         }
       );
 

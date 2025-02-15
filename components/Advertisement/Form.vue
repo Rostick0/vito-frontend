@@ -222,6 +222,7 @@ const { data: defectTypes } = await useApi<IDefectType[]>({
   apiMethod: "getAll",
   params: {
     expand: "defects",
+    "filter[defects.defectCategories.category_id]": props?.categoryId,
   },
   init: true,
 });
@@ -348,6 +349,7 @@ async function fetchProduct(
     params: {
       "filter[name][like]": searchString,
       "filter[vendor_id]": vendor.value.modelValue?.id,
+      "filter[category_id]": props?.categoryId,
       limit,
       page,
     },
