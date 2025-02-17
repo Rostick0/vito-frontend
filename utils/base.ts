@@ -146,6 +146,9 @@ export const transliterate = (text: string): string => {
 export const transliterateHref = (str: string) =>
   transliterate(str)?.replace(/ /g, "-");
 
+export const convertNamePath = (name: string) =>
+  encodeURIComponent(transliterateHref(name)).toLowerCase();
+
 export const getLinkAdvertisement = (
   city: string,
   advertisement: IAdvertisement
@@ -170,7 +173,7 @@ export const getPropertyValue = (productProperty: IProductProperty) => {
   );
 };
 
-export const groupByInArray = (array: [], name: string) => {
+export const groupByInArray = (array: Array<any>, name: string) => {
   const group = groupBy(array, name);
 
   return Object.keys(group).map((el) => ({
@@ -201,3 +204,5 @@ export const toArrayObject = (
     value: obj[key],
   })
 ) => Object.keys(obj).map(callback);
+
+export const convertToExpand = (expands: string[]) => expands.join(",");

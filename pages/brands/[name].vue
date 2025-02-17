@@ -33,12 +33,12 @@ const route = useRoute();
 const vendor = await api.vendors.getByName({
   name: route.params?.name?.toString(),
   params: {
-    expand: [
+    expand: convertToExpand([
       "image.image",
       "vendorCategories.image.image",
       "vendorCategories.category",
       "advertisements",
-    ].join(),
+    ]),
   },
 });
 

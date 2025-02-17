@@ -1,3 +1,5 @@
+import type { IReview } from "./Review";
+
 export interface IProduct {
   id: number;
   name: string;
@@ -9,8 +11,9 @@ export interface IProduct {
   mainImage?: IImage;
   category?: ICategory;
   images?: IImageRel[];
-  reviews_count?: number;
   user?: IUser;
   vendor?: IVendor;
   productProperties?: IProductProperty[];
+  reviews?: IReview[];
+  reviewsCount?: number;
 }

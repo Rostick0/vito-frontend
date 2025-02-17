@@ -44,3 +44,5 @@ export interface IAdvertisementCreate {
   advertisement_properties: number[];
   advertisement_defects?: number[];
 }
+
+export interface IAdvertisementUpdate extends IAdvertisementCreate {}

@@ -17,7 +17,7 @@ interface IProps {
 const props = defineProps<IProps>();
 const emits = defineEmits(["on:category"]);
 
-onMounted(() => {
-  console.log("update");
-});
+// onMounted(() => {
+//   console.log("update");
+// });
 </script>

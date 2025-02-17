@@ -42,7 +42,7 @@ const onSubmit = handleSubmit(
         (item) => item?.id
       ),
       office_id: office?.id,
-    } as IAdvertisementCreate;
+    } as IAdvertisementUpdate;
 
     const res = await api.advertisements.update({ id, data });
 
@@ -57,12 +57,12 @@ const onSubmit = handleSubmit(
 const advertisement = await api.advertisements.get({
   id,
   params: {
-    expand: [
+    expand: convertToExpand([
       "product.vendor",
       "images.image",
       "advertisementProperties.property",
       "advertisementDefects.defect",
-    ].join(),
+    ]),
   },
 });
 

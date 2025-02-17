@@ -23,7 +23,7 @@ export interface IAdvertisementsMethods {
     params,
   }: {
     id: string | number;
-    data: IAdvertisementCreate;
+    data: IAdvertisementUpdate;
     params?: Record<string, any>;
   }) => Promise<IAdvertisement & IErrorData>;
 }

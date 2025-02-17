@@ -35,7 +35,7 @@ const { data: newAdvertisements, get: getNewAdvertisements } = await useApi<
   apiMethod: "getAll",
   apiName: "advertisements",
   params: {
-    expand: ["mainImage", "user"].join(","),
+    expand: convertToExpand(["mainImage", "user"]),
     sort: "-id",
     // limit:
   },
@@ -49,7 +49,7 @@ const { data: properties, get: getProperties } = await useApi<IProperty[]>({
     expand: "productProperties.propertyValue",
     "filter[is_specified]": 1,
   },
-  // filters 
+  // filters
 });
 
 await Promise.all([getNewAdvertisements(), getProperties()]);

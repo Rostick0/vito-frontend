@@ -20,7 +20,6 @@ const { data: categories, get: getCategories } = await useApi<ICategory[]>({
 await getCategories();
 
 const categoryId = ref(null);
-// const categoryId = ref(1);
 
 useHead({
   title: "Добавление объявления",

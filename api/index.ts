@@ -8,6 +8,7 @@ import images from "./modules/images";
 import productProperties from "./modules/productProperties";
 import products from "./modules/products";
 import properties from "./modules/properties";
+import reviews from "./modules/reviews";
 import users from "./modules/users";
 import vendors from "./modules/vendors";
 
@@ -22,6 +23,7 @@ const api = {
   productProperties,
   products,
   properties,
+  reviews,
   users,
   vendors,
 };

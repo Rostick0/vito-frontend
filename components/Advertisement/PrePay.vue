@@ -23,14 +23,19 @@
         />
       </button>
     </div>
-    <div class="mb-3">
+    <NuxtLink
+      class="mb-3"
+      :to="
+        ROUTES_NAMES.productReviews(productNameHref, advertisement?.product?.id as number)
+      "
+    >
       <span class="bg-green-500 text-white rounded py-1 px-1.5">{{
         advertisement?.product?.raiting
       }}</span
       >&nbsp;<span class="text-green-500"
-        >{{ advertisement?.product?.reviews_count }} отзывов о модели</span
+        >{{ advertisement?.product?.reviewsCount }} отзывов о модели</span
       >
-    </div>
+    </NuxtLink>
     <AdvertisementUser v-if="advertisement?.user" :user="advertisement?.user" />
   </div>
 </template>
@@ -38,6 +43,7 @@
 <script lang="ts" setup>
 interface IProps {
   advertisement: IAdvertisement;
+  productNameHref: string;
 }
 
 const props = defineProps<IProps>();

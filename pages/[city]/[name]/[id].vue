@@ -12,21 +12,9 @@
           v-if="$device.isMobileOrTablet"
           class="mt-6 -mb-8"
           :advertisement="advertisement"
+          :productNameHref="productNameHref"
         />
         <div class="flex flex-col gap-y-10 max-md:gap-y-5 mt-16">
-          <!-- <AdvertisementParams title="О смартфоне">
-            <div class="grid gap-2 md:grid-cols-2">
-              <AdvertisementParamsItem title="Экран"
-                >Без дефектов</AdvertisementParamsItem
-              >
-              <AdvertisementParamsItem title="Корпус"
-                >Без дефектов</AdvertisementParamsItem
-              >
-              <AdvertisementParamsItem title="Комплект"
-                >Коробка, Блок зарядки, Провод зарядки</AdvertisementParamsItem
-              >
-            </div>
-          </AdvertisementParams> -->
           <AdvertisementParams title="Характеристики">
             <div class="grid gap-2 sm:grid-cols-2">
               <AdvertisementParamsItem title="Состояние">{{
@@ -58,9 +46,10 @@
                 v-if="advertisement?.product?.name"
                 class="text-sky-400"
                 :to="
-                  `/products/${encodeURIComponent(
-                    transliterateHref(advertisement?.product?.name)
-                  )}/${advertisement?.product?.id}`.toLowerCase()
+                  ROUTES_NAMES.product(
+                    productNameHref,
+                    advertisement?.product?.id
+                  )
                 "
                 >Все характеристики</NuxtLink
               >
@@ -84,9 +73,9 @@
           >
         </div>
 
-        <div class="mt-10">
+        <div v-if="advertisements?.length" class="mt-10">
           <UiH2>Рекомендации для вас</UiH2>
-          <!-- <CardProductList :products="products" /> -->
+          <CardAdvertisementColList :advertisements="advertisements" />
         </div>
         <div
           v-if="$device.isMobileOrTablet"
@@ -99,6 +88,7 @@
         v-if="$device.isDesktop"
         class="max-w-80"
         :advertisement="advertisement"
+        :productNameHref="productNameHref"
       />
     </div>
   </div>
@@ -117,19 +107,37 @@ const { data: advertisement, get: getAdvertisement } =
       id: route.params?.id?.toString(),
     },
     params: {
-      expand: [
+      expand: convertToExpand([
         "advertisementProperties.productProperty.property",
         "advertisementProperties.productProperty.propertyValue",
         "advertisementDefects.defect",
         "images.image",
         "product.vendor",
-      ].join(","),
+        "product.reviews",
+        "product.reviewsCount",
+      ]),
     },
   });
-
-await Promise.all([getAdvertisement()]);
+await getAdvertisement();
 
 if (!advertisement.value) navigateTo("/404", {});
+
+const { data: advertisements, get: getAdvertisements } = await useApi<
+  IAdvertisement[]
+>({
+  apiMethod: "getAll",
+  apiName: "advertisements",
+  params: {
+    "filter[product_id]": advertisement.value?.product_id,
+  },
+});
+await getAdvertisements();
+
+const productNameHref = computed(() =>
+  convertNamePath(advertisement.value?.product?.name as string)
+);
+
+// await Promise.all([getAdvertisement()]);
 
 // definePageMeta({
 //   //   name: "empty",

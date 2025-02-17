@@ -34,12 +34,12 @@ const { data: product, get: getProduct } = await useApi<IProduct>({
     id: route.params?.id?.toString(),
   },
   params: {
-    expand: [
+    expand: convertToExpand([
       "images.image",
       "productProperties.property.propertyType",
       "productProperties.property.propertyValues",
       "productProperties.propertyValue",
-    ].join(","),
+    ]),
   },
 });
 
