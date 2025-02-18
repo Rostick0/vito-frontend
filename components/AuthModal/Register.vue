@@ -3,11 +3,19 @@
     <UiH2>Регистрация</UiH2>
     <form @submit="onSubmit" class="mb-4">
       <div class="flex flex-col gap-y-3 mb-6">
-        <VFormComponent :field="email" />
-        <VFormComponent :field="password" />
-        <VFormComponent :field="repeat_password" />
+        <template v-if="step === 1">
+          <VFormComponent :field="name" />
+          <VFormComponent :field="tel" />
+        </template>
+        <template v-else>
+          <VFormComponent :field="email" />
+          <VFormComponent :field="password" />
+          <VFormComponent :field="repeat_password" />
+        </template>
       </div>
-      <UiBtn class="w-full justify-center">Войти</UiBtn>
+      <UiBtn class="w-full justify-center">{{
+        step === 2 ? "Зарегистрироваться" : "Далее"
+      }}</UiBtn>
     </form>
     <div class="text-sm">
       У вас есть аккаунт?&nbsp;<button
@@ -30,9 +38,38 @@ interface IProps {
 const props = defineProps<IProps>();
 const emits = defineEmits(["activeLoginForm"]);
 
+const step = ref<number>(1);
+
 const { register } = await useAuth();
 
 const { handleSubmit, setErrors } = useForm<IRegister>();
+
+const formValues = ref({});
+
+const name = ref({
+  name: "name",
+  type: "text",
+  rules: "required|max:255",
+  modelValue: "",
+
+  bind: {
+    label: "Имя",
+    placeholder: "Введите ваше имя",
+  },
+});
+
+const tel = ref({
+  name: "tel",
+  type: "text",
+  rules: "required|max:255",
+  modelValue: "",
+
+  bind: {
+    label: "Телефон",
+    type: "tel",
+    placeholder: "Введите ваш номер телефона",
+  },
+});
 
 const email = ref({
   name: "email",
@@ -66,8 +103,14 @@ const repeat_password = ref({
   },
 });
 
-const onSubmit = handleSubmit(async (repeat_password, ...values) => {
-  const res = await register(values);
+const onSubmit = handleSubmit(async ({ repeat_password, ...values }) => {
+  formValues.value = { ...formValues.value, ...values };
+  if (step.value < 2) {
+    step.value++;
+    return;
+  }
+
+  const res = await register(formValues.value);
 
   if (res) {
     setErrors(res);

@@ -1,6 +1,9 @@
 <template>
   <div class="grow text-center py-10">
-    {{ text }}
+    <template v-if="text">
+      {{ text }}
+    </template>
+    <slot />
   </div>
 </template>
 

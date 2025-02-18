@@ -4,7 +4,8 @@
       <ReviewCard :product="product" />
     </div>
     <div class="">
-      <ReviewList :reviews="reviews" />
+      <LazyReviewList v-if="reviews?.length" :reviews="reviews" />
+      <LazyUiNotFound v-else />
     </div>
   </div>
 </template>

@@ -75,7 +75,7 @@
 
         <div v-if="advertisements?.length" class="mt-10">
           <UiH2>Рекомендации для вас</UiH2>
-          <CardAdvertisementColList :advertisements="advertisements" />
+          <LazyCardAdvertisementColList :advertisements="advertisements" />
         </div>
         <div
           v-if="$device.isMobileOrTablet"

@@ -16,6 +16,9 @@ export interface ILogin {
 }
 
 export interface IRegister {
+  name: string;
+  tel: string;
   email: string;
   password: string;
+  repeat_password: string;
 }
