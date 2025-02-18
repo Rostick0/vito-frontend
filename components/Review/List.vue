@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-3">
+  <div class="bg-white rounded-xl flex flex-col gap-4 p-4">
     <ReviewItem v-for="review in reviews" :key="review?.id" :review="review" />
   </div>
 </template>

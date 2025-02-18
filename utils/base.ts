@@ -206,3 +206,23 @@ export const toArrayObject = (
 ) => Object.keys(obj).map(callback);
 
 export const convertToExpand = (expands: string[]) => expands.join(",");
+
+export const getColorRaiting = (value: number, type: "bg" | "text") => {
+  const colors = [
+    `${type}-green-500`,
+    `${type}-yellow-400`,
+    `${type}-orange-500`,
+    `${type}-red-500`,
+    `${type}-red-700`,
+  ];
+
+  if (value > 4.4) return colors[0];
+
+  if (value > 3.8) return colors[1];
+
+  if (value > 3.2) return colors[2];
+
+  if (value > 2.8) return colors[3];
+
+  return colors[4];
+};

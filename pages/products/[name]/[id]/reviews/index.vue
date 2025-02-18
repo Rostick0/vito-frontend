@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto" v-if="product">
-    <div class="">
+    <div class="mb-12">
       <ReviewCard :product="product" />
     </div>
     <div class="">
@@ -20,7 +20,7 @@ const { data: product, get: getProduct } = await useApi<IProduct>({
     id: route.params?.id?.toString(),
   },
   params: {
-    expand: convertToExpand(["mainImage"]),
+    expand: convertToExpand(["mainImage", "reviewsCount"]),
   },
 });
 
