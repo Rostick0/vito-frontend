@@ -21,7 +21,7 @@
           <div class="flex flex-col gap-y-3">
             <VFormComponent :field="vendor" />
             <VFormComponent v-if="vendor.modelValue" :field="product" />
-            <AdvertisementFormProperties
+            <LazyAdvertisementFormProperties
               v-if="properties?.length"
               :properties="properties"
               :advertisementProperties="advertisement?.advertisementProperties"
@@ -31,7 +31,7 @@
         <div class="" v-if="!is_new.modelValue && defectTypes?.length">
           <h2 class="font-bold text-2xl mb-4">Неисправности</h2>
           <div class="flex flex-col gap-y-3">
-            <AdvertisementFormDefects
+            <LazyAdvertisementFormDefects
               :defectTypes="defectTypes"
               :advertisementDefects="advertisement?.advertisementDefects"
             />
@@ -153,6 +153,7 @@ const title = ref({
   type: "text",
   name: "title",
   modelValue: props?.advertisement?.title ?? "",
+  rules: "required|max:255",
 
   bind: {
     label: "Название объявления",

@@ -3,12 +3,12 @@
     <div class="flex items-start gap-5">
       <Filter v-if="properties" :properties="properties" />
 
-      <CardAdvertisementRowList
+      <LazyCardAdvertisementRowList
         class="grow"
         v-if="newAdvertisements?.length"
         :advertisements="newAdvertisements"
       />
-      <UiNotFound v-else />
+      <LazyUiNotFound v-else />
     </div>
   </div>
 </template>

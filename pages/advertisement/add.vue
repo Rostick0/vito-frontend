@@ -1,10 +1,10 @@
 <template>
-  <AdvertisementCategories
+  <LazyAdvertisementCategories
     v-if="!categoryId"
     :categories="categories"
     @setCategory="(val) => (categoryId = val)"
   />
-  <AdvertisementCreate v-else :categoryId="categoryId" />
+  <LazyAdvertisementCreate v-else :categoryId="categoryId" />
 </template>
 
 <script lang="ts" setup>

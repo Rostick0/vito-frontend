@@ -16,7 +16,7 @@
       <h1 class="font-bold text-2xl">{{ vendor?.name }}</h1>
     </div>
     <div v-if="vendorCategories?.length" class="mt-6">
-      <CategoryList :categories="vendorCategories" />
+      <LazyCategoryList :categories="vendorCategories" />
     </div>
     <div v-if="advertisements?.length" class="mt-6">
       <UiH2>Товары бренда</UiH2>
