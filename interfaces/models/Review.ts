@@ -22,3 +22,8 @@ export interface IReviewUpdate {
   mark: markType;
   text: string;
 }
+
+export interface IReviewMarks {
+  count: number;
+  mark: number;
+}

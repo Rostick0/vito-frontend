@@ -4,7 +4,7 @@ import type { initialFiltersItem } from "./useFilters";
 
 interface iUseApi {
   apiName: apiNames;
-  apiMethod: "get" | "getAll";
+  apiMethod: "get" | "getAll" | string;
   params?: object;
   filters?: globalThis.Ref<initialFiltersItem>;
   //   unwatchedFilters = {},

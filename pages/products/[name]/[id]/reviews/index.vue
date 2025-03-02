@@ -3,9 +3,20 @@
     <div class="mb-12">
       <ReviewCard :product="product" />
     </div>
-    <div class="">
-      <LazyReviewList v-if="reviews?.length" :reviews="reviews" />
-      <LazyUiNotFound v-else />
+    <div class="flex gap-y-6 gap-x-10">
+      <div class="">
+        <ReviewMarks
+          class="mb-5"
+          :reviewMarks="reviewMarks as IReviewMarks[]"
+        />
+        <NuxtLink>
+          <UiBtn>Оставить отзыв</UiBtn>
+        </NuxtLink>
+      </div>
+      <div class="grow">
+        <LazyReviewList v-if="reviews?.length" :reviews="reviews" />
+        <LazyUiNotFound v-else />
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +43,17 @@ const { data: reviews, get: getReviews } = await useApi<IReview[]>({
   },
 });
 
-await Promise.all([getProduct(), getReviews()]);
+const { data: reviewMarks, get: getReviewMarks } = await useApi<IReviewMarks[]>(
+  {
+    apiName: "reviews",
+    apiMethod: "getMarks",
+    requestParams: {
+      id: route.params?.id?.toString(),
+    },
+  }
+);
+
+await Promise.all([getProduct(), getReviews(), getReviewMarks()]);
 
 if (!product.value) navigateTo("/404", {});
 

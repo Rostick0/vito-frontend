@@ -13,12 +13,22 @@ export interface IReviewMethods {
     data: IReviewUpdate;
     params?: Record<string, any>;
   }) => Promise<IReview & IErrorData>;
+  getMarks: ({
+    id,
+    params,
+  }: {
+    id: number | string;
+    params?: any;
+  }) => Promise<IReviewMarks[]>;
 }
 
 export default <IReviewMethods>{
   getAll: async ({ params }, headers) =>
     useFetcher().get(`/reviews`, params, headers),
-  delete: async ({ id, params }) => useFetcher().delete(`/users/${id}`, params),
+  delete: async ({ id, params }) =>
+    useFetcher().delete(`/reviews/${id}`, params),
   update: async ({ id, data, params }) =>
-    useFetcher().patch(`/users/${id}`, data, params),
+    useFetcher().patch(`/reviews/${id}`, data, params),
+  getMarks: async ({ id, params }) =>
+    useFetcher().get(`/reviews/marks/${id}`, params),
 };
