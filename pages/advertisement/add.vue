@@ -30,10 +30,6 @@ const categoryId = ref<number | null>(
     : null
 );
 
-useHead({
-  title: "Добавление объявления",
-});
-
 const setCategory = (id: number) => {
   categoryId.value = id;
   router.replace({
@@ -43,6 +39,9 @@ const setCategory = (id: number) => {
   });
 };
 
+useHead({
+  title: "Добавление объявления",
+});
 // definePageMeta({
 //   layout: "auth",
 //   middleware: ["no-auth"],

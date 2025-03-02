@@ -62,9 +62,7 @@ export default async () => {
           { Authorization: `Bearer ${accessToken.value}` }
         )
         .then((resp) => {
-          if (!resp?.error && resp) {
-            user.value = resp;
-          }
+          if (!resp?.error && resp) user.value = resp?.user;  
         });
     } catch (error) {
       console.error(error);

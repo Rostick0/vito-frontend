@@ -6,5 +6,9 @@
 </template>
 
 <script lang="ts" setup>
-// moment.locale('ru')
+const { accessToken, user, getUser } = await useAuth();
+if (accessToken.value && !user.value) {
+  await getUser();
+}
+
 </script>
