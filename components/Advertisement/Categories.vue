@@ -20,7 +20,6 @@ import api from "~/api";
 interface IProps {
   categories?: ICategory[];
 }
-
 const props = defineProps<IProps>();
 
 const emits = defineEmits(["setCategory"]);

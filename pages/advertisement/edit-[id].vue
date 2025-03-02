@@ -11,13 +11,27 @@ import flattenDepth from "lodash/flattenDepth";
 import api from "~/api";
 import { useForm } from "vee-validate";
 
-const categoryId = ref(1);
-
 const { handleSubmit, setErrors } = useForm<IAdvertisementSubmit>();
 const { getImageIdsFrom } = useImages();
 
 const route = useRoute();
 const id = route.params?.id?.toString();
+
+const advertisement = await api.advertisements.get({
+  id,
+  params: {
+    expand: convertToExpand([
+      "product.vendor",
+      "images.image",
+      "advertisementProperties.property",
+      "advertisementDefects.defect",
+    ]),
+  },
+});
+
+if (!advertisement) navigateTo("/404");
+
+const categoryId = ref(advertisement?.id);
 
 const onSubmit = handleSubmit(
   async ({
@@ -53,18 +67,6 @@ const onSubmit = handleSubmit(
     }
   }
 );
-
-const advertisement = await api.advertisements.get({
-  id,
-  params: {
-    expand: convertToExpand([
-      "product.vendor",
-      "images.image",
-      "advertisementProperties.property",
-      "advertisementDefects.defect",
-    ]),
-  },
-});
 
 useHead({
   title: `Редактирование объявления #${id}`,
