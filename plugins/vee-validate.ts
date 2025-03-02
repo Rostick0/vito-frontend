@@ -1,17 +1,13 @@
 export default defineNuxtPlugin(async (nuxtApp) => {
-  const { configure, defineRule } = await import("vee-validate");
-  const {
-    required,
-    email,
-    min,
-    max,
-    confirmed,
-    size,
-    image,
-    min_value,
-    max_value,
-  } = await import("@vee-validate/rules");
-  const { localize } = await import("@vee-validate/i18n");
+  const [
+    { configure, defineRule },
+    { required, email, min, max, confirmed, size, image, min_value, max_value },
+    { localize },
+  ] = await Promise.all([
+    import("vee-validate"),
+    import("@vee-validate/rules"),
+    import("@vee-validate/i18n"),
+  ]);
 
   defineRule("required", required);
   defineRule("email", email);
@@ -24,7 +20,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   defineRule("max_value", max_value);
 
   configure({
-    // create and set a localization handler
     generateMessage: localize("ru", {
       messages: {
         required: "Поле обязательное к заполнению",

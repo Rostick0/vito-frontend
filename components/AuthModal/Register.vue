@@ -74,6 +74,7 @@ const tel = ref({
 const email = ref({
   name: "email",
   type: "text",
+  rules: "required|email|max:255",
 
   bind: {
     label: "Почта",
@@ -84,6 +85,7 @@ const email = ref({
 const password = ref({
   name: "password",
   type: "text",
+  rules: "required|min:8|max:255",
 
   bind: {
     label: "Пароль",
@@ -95,6 +97,7 @@ const password = ref({
 const repeat_password = ref({
   name: "repeat_password",
   type: "text",
+  rules: "required",
 
   bind: {
     label: "Подтвердите пароль",

@@ -36,6 +36,7 @@ const { handleSubmit, setErrors } = useForm<ILogin>();
 const email = ref({
   name: "email",
   type: "text",
+  rules: "required|email|max:255",
 
   bind: {
     label: "Почта",
@@ -46,6 +47,7 @@ const email = ref({
 const password = ref({
   name: "password",
   type: "text",
+  rules: "required",
 
   bind: {
     label: "Пароль",
