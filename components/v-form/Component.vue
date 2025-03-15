@@ -1,18 +1,18 @@
 <template>
-  <VFormField
+  <LazyVFormField
     v-if="['input', 'text'].includes(field.type)"
     v-model="model"
     v-bind="field.bind"
     :errorMessage="errorMessage"
   />
   <template v-else-if="field.type == 'select'">
-    <VFormMultiSelect
+    <LazyVFormMultiSelect
       v-model="model"
       v-bind="field.bind"
       :error-message="errorMessage"
     />
   </template>
-  <VFormTextarea
+  <LazyVFormTextarea
     v-else-if="field.type == 'textarea'"
     v-model="model"
     v-bind="field.bind"
@@ -24,7 +24,7 @@
     v-bind="field.bind"
     :error-message="errorMessage"
   /> -->
-  <VFormMultiMSelect
+  <LazyVFormMultiMSelect
     v-else-if="field.type == 'multiple-select'"
     v-model="model"
     v-bind="field.bind"
@@ -32,52 +32,59 @@
     :name="field.name"
   />
 
-  <VFormSwitch
+  <LazyVFormSwitch
     v-else-if="['switch', 'checkbox'].includes(field.type)"
     v-model="model"
     v-bind="field.bind"
     :error-message="errorMessage"
   />
 
-  <VFormTagCheckbox
+  <LazyVFormTagCheckbox
     v-else-if="field.type == 'tag'"
     v-model="model"
     v-bind="field.bind"
     :error-message="errorMessage"
   />
 
-  <VFormDatePicker
+  <LazyVFormDatePicker
     v-else-if="field.type == 'date'"
     v-model="model"
     v-bind="field.bind"
     :error-message="errorMessage"
   />
 
-  <VFormFileLoader
+  <LazyVFormFileLoader
     v-else-if="field.type == 'file-loader'"
     v-model="model"
     v-bind="field.bind"
     :error-message="errorMessage"
   />
-  <VFormMFileLoader
+  <LazyVFormMFileLoader
     v-else-if="field.type == 'multiple-file-loader'"
     v-model="model"
     v-bind="field.bind"
     :error-message="errorMessage"
   />
 
-  <VFormPhotoLoader
+  <LazyVFormPhotoLoader
     v-else-if="field.type == 'photo-loader'"
     v-model="model"
     v-bind="field.bind"
     :error-message="errorMessage"
   />
 
-  <VFormMPhotoLoader
+  <LazyVFormMPhotoLoader
     v-else-if="field.type == 'multiple-photo-loader'"
     v-model="model"
     v-bind="field.bind"
     :error-message="errorMessage"
+  />
+
+  <LazyVFormStars
+    v-else-if="field.type === 'stars'"
+    v-model="model"
+    v-bind="field.bind"
+    :errorMessage="errorMessage"
   />
 </template>
 

@@ -5,11 +5,15 @@
     </div>
     <div class="flex gap-y-6 gap-x-10">
       <div class="">
-        <ReviewMarks
-          class="mb-5"
-          :reviewMarks="reviewMarks as IReviewMarks[]"
-        />
-        <NuxtLink>
+        <ReviewMarks class="mb-5" :reviewMarks="reviewMarks ?? []" />
+        <NuxtLink
+          :to="
+            ROUTES_NAMES.productMutationReview(
+              convertNamePath(product?.name),
+              product?.id
+            )
+          "
+        >
           <UiBtn>Оставить отзыв</UiBtn>
         </NuxtLink>
       </div>
@@ -47,6 +51,9 @@ const { data: reviewMarks, get: getReviewMarks } = await useApi<IReviewMarks[]>(
   {
     apiName: "reviews",
     apiMethod: "getMarks",
+    params: {
+      reviewtable_type: "app\\models\\Product",
+    },
     requestParams: {
       id: route.params?.id?.toString(),
     },

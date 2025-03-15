@@ -8,4 +8,6 @@ export const ROUTES_NAMES = {
   product: (name: string, id: number) => `/products/${name}/${id}`,
   productReviews: (name: string, id: number) =>
     `/products/${name}/${id}/reviews`,
+  productMutationReview: (name: string, id: number) =>
+    `/products/${name}/${id}/reviews/mutation`,
 };

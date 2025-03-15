@@ -25,6 +25,7 @@ export default function useFetcher() {
     refetch: 1000000,
   } as IInitialParams;
 
+  console.log(token)
   if (token && token !== "") {
     initialParams.headers.Authorization = `Bearer ${token}`;
   }
@@ -41,7 +42,7 @@ export default function useFetcher() {
         params,
         headers: { ...initialParams?.headers, ...headers },
       } as NitroFetchOptions<string, "get">;
-
+      console.log(opts);
       return await apiFetch(url, opts)
         .then((res) => res)
         .catch((error) => getErrorData(error, signal?.aborted)?.popup());

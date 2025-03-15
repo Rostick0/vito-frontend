@@ -3,23 +3,23 @@
     <div class="flex flex-col gap-y-2">
       <ReviewMark
         :countStars="5"
-        :countReviews="reviewMarks?.find((item) => item.mark === 5)?.count"
+        :countReviews="reviewMarks?.find?.((item) => item.mark === 5)?.count"
       />
       <ReviewMark
         :countStars="4"
-        :countReviews="reviewMarks?.find((item) => item.mark === 4)?.count"
+        :countReviews="reviewMarks?.find?.((item) => item.mark === 4)?.count"
       />
       <ReviewMark
         :countStars="3"
-        :countReviews="reviewMarks?.find((item) => item.mark === 3)?.count"
+        :countReviews="reviewMarks?.find?.((item) => item.mark === 3)?.count"
       />
       <ReviewMark
         :countStars="2"
-        :countReviews="reviewMarks?.find((item) => item.mark === 2)?.count"
+        :countReviews="reviewMarks?.find?.((item) => item.mark === 2)?.count"
       />
       <ReviewMark
         :countStars="1"
-        :countReviews="reviewMarks?.find((item) => item.mark === 1)?.count"
+        :countReviews="reviewMarks?.find?.((item) => item.mark === 1)?.count"
       />
     </div>
   </div>

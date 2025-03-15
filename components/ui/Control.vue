@@ -12,7 +12,7 @@
     <div v-if="label" class="control__label">
       {{ label }}
     </div>
-    <div class="control__wrap">
+    <div class="flex">
       <slot />
 
       <div v-if="leftIcon" class="control__icon-left">

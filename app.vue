@@ -7,6 +7,7 @@
 
 <script lang="ts" setup>
 const { accessToken, user, getUser } = await useAuth();
+console.log(accessToken.value, user.value)
 if (accessToken.value && !user.value) {
   await getUser();
 }

@@ -1,5 +1,12 @@
 import useFetcher from "../../utils/fetch";
 
+interface IMyReviewParams {
+  params: {
+    reviewtable_id: number;
+    reviewtable_type: string;
+  };
+}
+
 export interface IReviewMethods {
   getAll: ({ params }: { params: any }, header?: any) => Promise<IReview[]>;
   delete: ({ id, params }: { id: number; params?: any }) => Promise<any>;
@@ -20,6 +27,7 @@ export interface IReviewMethods {
     id: number | string;
     params?: any;
   }) => Promise<IReviewMarks[]>;
+  getMy: ({ params }: IMyReviewParams) => Promise<IReviewMarks>;
 }
 
 export default <IReviewMethods>{
@@ -31,4 +39,6 @@ export default <IReviewMethods>{
     useFetcher().patch(`/reviews/${id}`, data, params),
   getMarks: async ({ id, params }) =>
     useFetcher().get(`/reviews/marks/${id}`, params),
+  getMy: async ({ params }) =>
+    useFetcher().get(`/reviews/my`, params),
 };

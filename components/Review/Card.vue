@@ -11,7 +11,9 @@
       height="80"
     />
     <div class="">
-      <NuxtLink :to="ROUTES_NAMES.product(product?.name, product?.id)">
+      <NuxtLink
+        :to="ROUTES_NAMES.product(convertNamePath(product?.name), product?.id)"
+      >
         <h1 class="font-bold">Всё о модели: {{ product?.name }}</h1>
       </NuxtLink>
       <div

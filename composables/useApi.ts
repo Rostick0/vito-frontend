@@ -89,7 +89,6 @@ export default async <T>({
           // const { data: dataLocal, ...other } = res;
           // const dataLocal = res;
 
-          console.log(res);
           data.value = res;
           // data.value = dataLocal ?? res;
           // meta.value = other;

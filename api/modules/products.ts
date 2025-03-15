@@ -16,13 +16,13 @@ export interface IProductMethods {
   //     clinic_id: number;
   //   };
   // }) => Promise<{ data: IProduct }>;
-  // delete: ({
-  //   clinic_id,
-  //   params,
-  // }: {
-  //   clinic_id: number;
-  //   params?: any;
-  // }) => Promise<{ message: string }>;
+  delete: ({
+    id,
+    params,
+  }: {
+    id: number;
+    params?: any;
+  }) => Promise<{ message: string }>;
 }
 
 export default <IProductMethods>{
@@ -30,6 +30,6 @@ export default <IProductMethods>{
   getAll: async ({ params = {} } = {}, headers) =>
     useFetcher().get(`/products`, params, headers),
   // create: async ({ data }) => useFetcher().post(`/products`, data),
-  // delete: async ({ clinic_id, params }) =>
-  // useFetcher().delete(`/products/${clinic_id}`, params),
+  delete: async ({ id, params }) =>
+    useFetcher().delete(`/products/${id}`, params),
 };
