@@ -1,18 +1,19 @@
 <template>
   <div class="container mx-auto">
-    <UiH2>Отзыв</UiH2>
+    <UiH2>Отзыв - {{ product?.name }}</UiH2>
     <form @submit="onSubmit">
-      <div class="flex flex-wrap gap-x-2 gap-y-3 max-w-md">
+      <div class="flex flex-wrap gap-x-2 gap-y-3 mb-8 max-w-md">
         <VFormComponent :field="text" />
         <VFormComponent :field="mark" />
       </div>
-      <UiBtn>Отправить</UiBtn>
+      <UiBtn>{{ review?.id ? "Изменить" : "Отправить÷" }} </UiBtn>
     </form>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useForm } from "vee-validate";
+import { useToast } from "vue-toastification";
 import api from "~/api";
 
 const route = useRoute();
@@ -22,7 +23,20 @@ const defaultParams = {
   reviewtable_type: "app\\models\\Product",
 };
 
-const { data, get } = await useApi({
+const toast = useToast();
+
+const { data: product, get: getProduct } = await useApi<IProduct>({
+  apiName: "products",
+  apiMethod: "get",
+  params: {
+    field: "name",
+  },
+  requestParams: {
+    id: route.params.id,
+  },
+});
+
+const { data: review, get: getReview } = await useApi<IReview>({
   apiName: "reviews",
   apiMethod: "getMy",
   params: {
@@ -30,18 +44,18 @@ const { data, get } = await useApi({
   },
 });
 
-await get();
+await Promise.all([getProduct(), getReview()]);
 
 const { handleSubmit, setErrors } = useForm();
-// const data
+
 const onSubmit = handleSubmit(async (values) => {
   const data = {
     ...values,
   };
 
-  const res = data.value?.id
+  const res = review.value?.id
     ? await api.reviews.update({
-        id: data.value.id,
+        id: review.value.id,
         data: data as IReviewUpdate,
       })
     : await api.reviews.create({
@@ -50,14 +64,17 @@ const onSubmit = handleSubmit(async (values) => {
 
   if (res?.error) {
     setErrors(res?.errorResponse);
+    toast.error("Ошибка валидации");
     return;
   }
+
+  toast.success("Отзыв успешно " + (review.value?.id ? "изменён" : "создан"));
 });
 
 const text = ref({
   type: "textarea",
   name: "text",
-  modelValue: "",
+  modelValue: review.value?.text ?? "",
   rules: "required|max:255",
 
   bind: {
@@ -70,7 +87,7 @@ const text = ref({
 const mark = ref({
   type: "stars",
   name: "mark",
-  modelValue: "",
+  modelValue: review.value?.mark ?? "",
   rules: "required|max:255",
 
   bind: {

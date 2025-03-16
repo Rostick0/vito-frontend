@@ -6,7 +6,11 @@
     :leftIcon="leftIcon"
     :rightIcon="rightIcon"
   >
-    <UiStars v-model="value" size="24" />
+    <UiStars
+      :value="value"
+      @update:modelValue="(val) => emits('update:modelValue', val)"
+      size="24"
+    />
   </UiControl>
 </template>
 
@@ -22,6 +26,8 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
+
+const emits = defineEmits(["update:modelValue"]);
 
 const value = computed({
   get: () => props.modelValue,

@@ -35,10 +35,10 @@ export default <IReviewMethods>{
     useFetcher().get(`/reviews`, params, headers),
   delete: async ({ id, params }) =>
     useFetcher().delete(`/reviews/${id}`, params),
+  create: async ({ data }) => useFetcher().post(`/reviews`, data),
   update: async ({ id, data, params }) =>
     useFetcher().patch(`/reviews/${id}`, data, params),
   getMarks: async ({ id, params }) =>
     useFetcher().get(`/reviews/marks/${id}`, params),
-  getMy: async ({ params }) =>
-    useFetcher().get(`/reviews/my`, params),
+  getMy: async ({ params }) => useFetcher().get(`/reviews/my`, params),
 };
