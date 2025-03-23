@@ -7,6 +7,7 @@
     :rightIcon="rightIcon"
   >
     <UiStars
+      classStar="cursor-pointer"
       :value="value"
       @update:modelValue="(val) => emits('update:modelValue', val)"
       size="24"

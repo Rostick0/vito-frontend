@@ -2,7 +2,7 @@
   <div class="flex">
     <IconStar
       v-for="starClass in starClasses"
-      :class="starClass.class"
+      :class="[starClass.class, classStar]"
       @click="emits('update:modelValue', starClass.value)"
       :width="size"
       :height="size"
@@ -12,6 +12,7 @@
 
 <script lang="ts" setup>
 interface IProps {
+  classStar?: string;
   value?: number;
   size?: number | string;
 }

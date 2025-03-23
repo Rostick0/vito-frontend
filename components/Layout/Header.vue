@@ -17,7 +17,10 @@
             <NuxtLink class="flex" :to="ROUTES_NAMES.notifications">
               <IconNotification class="fill-zinc-200" />
             </NuxtLink>
-            <button @click="loginOpen" class="flex gap-x-1">
+            <button v-if="user">
+              <span>Профиль</span>
+            </button>
+            <button v-else @click="loginOpen" class="flex gap-x-1">
               <IconLogin class="fill-white" />
               <span>Авторизация</span>
             </button>
@@ -74,6 +77,8 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
+
+const user = useState<IUser | null>("user");
 
 const loginModal = "login";
 const registerModal = "register";
